@@ -1,8 +1,9 @@
 import React from 'react';
-import {Text} from 'react-native-ui-kitten'
+import {Button, Text} from 'react-native-ui-kitten'
 import {Platform, SafeAreaView, View} from "react-native";
 import {HeaderSmall} from "../../components/Text/HeaderSmall";
 import {Header} from "../../components/Text/Header";
+import {userLogOut} from "../../functions/user";
 
 class SettingsPage extends React.Component {
   render() {
@@ -27,6 +28,11 @@ class SettingsPage extends React.Component {
               Settings
             </Header>
           </View>
+          <Button onPress={() => {
+            userLogOut()
+          }}>
+            Sign out
+          </Button>
         </SafeAreaView>
       </View>
     )
