@@ -78,23 +78,23 @@ class LandingPage extends Component<NavigationInjectedProps, LandingPageState> {
   }
 
   _signInToFirebase(credential: FirebaseAuthTypes.AuthCredential): Promise<void> {
-      return new Promise<void>((resolve, reject) => {
-        auth().signInWithCredential(credential).then((userCredential) => {
-          if (!userCredential) {
-            return reject()
-          }
-          registerUserFirebase({
-            email: userCredential.user.email || "",
-            name: userCredential.user.displayName || ""
-          }, userCredential.user.uid).then(() => {
-            resolve()
-          }).catch(() => {
-            reject()
-          })
+    return new Promise<void>((resolve, reject) => {
+      auth().signInWithCredential(credential).then((userCredential) => {
+        if (!userCredential) {
+          return reject()
+        }
+        registerUserFirebase({
+          email: userCredential.user.email || "",
+          name: userCredential.user.displayName || ""
+        }, userCredential.user.uid).then(() => {
+          resolve()
         }).catch(() => {
           reject()
         })
+      }).catch(() => {
+        reject()
       })
+    })
   }
 
   _googleSignIn() {
@@ -150,22 +150,22 @@ class LandingPage extends Component<NavigationInjectedProps, LandingPageState> {
           flex: 1,
         }}>
           <SafeAreaView style={{
-            flex: 1
+            flex: 1,
           }}>
-            <SafeAreaView
-              style={{flex: 1, justifyContent: 'center', alignItems: 'flex-end', marginLeft: 25}}>
+            <View style={{
+              flex: 1,
+              paddingLeft: 25
+            }}>
               <Image source={landingCode} style={{
                 resizeMode: 'contain',
                 height: '100%',
                 width: '100%'
               }}/>
-            </SafeAreaView>
+            </View>
             <View style={{
-              flex: 1.2,
               paddingLeft: 25,
               paddingRight: 25,
               justifyContent: 'center',
-              height: '100%'
             }}>
               <Text style={{
                 fontSize: 40,
@@ -239,7 +239,8 @@ class LandingPage extends Component<NavigationInjectedProps, LandingPageState> {
                   <SafeAreaView style={{
                     alignItems: 'flex-end',
                     justifyContent: 'flex-end',
-                    marginTop: 30
+                    marginTop: 15,
+                    marginBottom: 15
                   }}>
                     <TouchableOpacity onPress={() => {
                       userLogIn().then(() => {
