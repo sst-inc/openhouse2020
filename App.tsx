@@ -4,7 +4,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import codePush from "react-native-code-push";
 import LandingPage from "./src/pages/Landing";
 import {mapping, light, dark} from '@eva-design/eva';
-import {ApplicationProvider, IconRegistry, Drawer, Layout} from '@ui-kitten/components';
+import {ApplicationProvider, IconRegistry, Drawer, Layout, Icon} from '@ui-kitten/components';
 import {Provider as PaperProvider} from 'react-native-paper';
 import HomePage from "./src/pages/Home";
 import AppLoading from "./src/pages/AppLoading";
@@ -23,17 +23,29 @@ import {Text} from "@ui-kitten/components";
 //@ts-ignore
 import customMapping from './assets/theme/custom-mapping.json'
 import {ThemeContext} from "./src/functions/theme";
+import {ThemedIcon} from "./src/components/Icon/ThemedIcon";
+
+const drawerData: {title: string; icon: any}[] = [
+  {
+    title: "Home",
+    icon: () => (<ThemedIcon name={'home-outline'} size={20} style={{marginRight: 15}}/>)
+  },
+  {
+    title: "Settings",
+    icon: () => (<ThemedIcon name={'settings-2-outline'} size={20} style={{marginRight: 15}}/>)
+  }
+]
 
 const DrawerComponent = ({ navigation }: any) => {
   const onSelect = (index: any) => {
-    const { [index]: selectedTabRoute } = navigation.state.routes;
-    navigation.navigate(selectedTabRoute.routeName);
+    const route = drawerData[index];
+    navigation.navigate(route.title);
   };
 
   return (
     <Layout style={{flex: 1}}>
       <SafeAreaView>
-        <Drawer data={[{ title: 'Home' }, { title: 'Settings' }]} onSelect={onSelect} />
+        <Drawer data={drawerData} onSelect={onSelect} />
       </SafeAreaView>
     </Layout>
   );
@@ -90,12 +102,15 @@ class App extends React.Component<{}, AppState> {
     }
   }
 
-  componentDidMount(): void {
+  componentWillMount(): void {
     AsyncStorage.getItem("theme").then((theme) => {
       if (theme === 'light' || theme === 'dark') {
         this.setState({theme})
       }
     })
+  }
+
+  componentDidMount(): void {
     Push.setListener({
       onPushNotificationReceived: function (pushNotification) {
         let message = pushNotification.message;

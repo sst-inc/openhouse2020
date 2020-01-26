@@ -1,6 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
-import {Spinner} from '@ui-kitten/components'
+import {Spinner, Layout} from '@ui-kitten/components'
 import {checkUserLoggedIn} from "../functions/user";
 import {NavigationInjectedProps} from "react-navigation";
 
@@ -17,13 +16,13 @@ class AppLoading extends React.Component<NavigationInjectedProps<any>> {
 
     render() {
         return (
-            <View style={{
+            <Layout style={{
                 alignItems: 'center',
                 justifyContent: 'center',
                 flex: 1
             }}>
                 <Spinner size={'giant'}/>
-            </View>
+            </Layout>
         )
     }
 }
