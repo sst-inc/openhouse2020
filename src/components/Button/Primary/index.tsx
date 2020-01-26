@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Platform} from 'react-native'
+import {View, TouchableOpacity, Platform} from 'react-native'
+import {Text, Layout} from "@ui-kitten/components";
 
 export function PrimaryButton(props: {title: string, onPress?(): void}) {
     return (
@@ -14,8 +15,7 @@ export function PrimaryButton(props: {title: string, onPress?(): void}) {
                 }
             })
         }}>
-            <View style={{
-                backgroundColor: 'white',
+            <Layout style={{
                 borderRadius: 18,
                 height: 36,
                 alignItems: 'center',
@@ -42,10 +42,10 @@ export function PrimaryButton(props: {title: string, onPress?(): void}) {
                         },
                     }),
                     opacity: 0.75
-                }}>
+                }} category={'p1'}>
                     {props.title}
                 </Text>
-            </View>
+            </Layout>
         </TouchableOpacity>
     )
 }

@@ -20,9 +20,9 @@ import SettingsPage from "./src/pages/Settings";
 import customTheme from './assets/theme/custom-theme.json'
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 import {Text} from "@ui-kitten/components";
-import {GLOBAL} from "./database/global";
 //@ts-ignore
 import customMapping from './assets/theme/custom-mapping.json'
+import {ThemeContext} from "./src/functions/theme";
 
 const AppNavigator = createStackNavigator({
   Home: {
@@ -61,24 +61,23 @@ const Switch = createSwitchNavigator({
 const AppContainer = createAppContainer(Switch)
 
 export interface AppState {
-  dark: boolean;
+  theme: 'light' | 'dark'
 }
 
-class App extends React.Component<{}, AppState> {
-  state = {
-    dark: false
-  }
+const themes = {light, dark}
 
-  componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<AppState>, snapshot?: any): void {
-    if (prevState.dark !== this.state.dark) {
-      AsyncStorage.setItem("theme", this.state.dark ? "dark" : 'light')
+class App extends React.Component<{}, AppState> {
+  constructor(props: {}) {
+    super(props);
+    this.state = {
+      theme: 'dark'
     }
   }
 
   componentDidMount(): void {
     AsyncStorage.getItem("theme").then((theme) => {
-      if (theme) {
-        this.setState({dark: theme === 'dark'})
+      if (theme === 'light' || theme === 'dark') {
+        this.setState({theme})
       }
     })
     Push.setListener({
@@ -102,16 +101,28 @@ class App extends React.Component<{}, AppState> {
     })
   }
 
+  _toggleTheme() {
+    const nextTheme = this.state.theme === 'light' ? 'dark' : 'light';
+    AsyncStorage.setItem('theme', nextTheme)
+    this.setState({theme: nextTheme})
+  }
+
   render() {
-    GLOBAL.app = this
+    const currentTheme = themes[this.state.theme]
     return (
       <PaperProvider>
         <IconRegistry icons={EvaIconsPack}/>
-        <ApplicationProvider mapping={mapping}
-                             customMapping={customMapping}
-                             theme={{...customTheme, ...this.state.dark ? dark : light}}>
-          <AppContainer/>
-        </ApplicationProvider>
+        <ThemeContext.Provider value={{
+          theme: this.state.theme, toggleTheme: () => {
+            this._toggleTheme()
+          }
+        }}>
+          <ApplicationProvider mapping={mapping}
+                               customMapping={customMapping}
+                               theme={{...currentTheme, ...customTheme}}>
+            <AppContainer/>
+          </ApplicationProvider>
+        </ThemeContext.Provider>
       </PaperProvider>
     )
   }

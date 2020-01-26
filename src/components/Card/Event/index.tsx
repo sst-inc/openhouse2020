@@ -1,5 +1,6 @@
 import React from 'react';
-import {ImageBackground, ImageURISource, Platform, Text, TouchableOpacity, View} from "react-native";
+import {ImageBackground, ImageURISource, Platform, TouchableOpacity, View} from "react-native";
+import {Layout, Text} from "@ui-kitten/components";
 
 export function EventCard(props: { title: string, image?: ImageURISource, onPress(): void }) {
   return (
@@ -13,23 +14,22 @@ export function EventCard(props: { title: string, image?: ImageURISource, onPres
       ...Platform.select({
         ios: {
           elevation: 10,
-          shadowColor: 'black',
+          shadowColor: 'gray',
           shadowOffset: {width: 0, height: 0},
-          shadowOpacity: 0.16,
+          shadowOpacity: 0.5,
           shadowRadius: 10,
         }
       })
     }}>
-      <View style={{
-        backgroundColor: 'white',
+      <Layout style={{
         borderRadius: 5,
         overflow: 'hidden',
         ...Platform.select({
           android: {
             elevation: 10,
-            shadowColor: 'black',
+            shadowColor: 'gray',
             shadowOffset: {width: 0, height: 0},
-            shadowOpacity: 0.16,
+            shadowOpacity: 0.5,
             shadowRadius: 10,
           }
         })
@@ -46,17 +46,17 @@ export function EventCard(props: { title: string, image?: ImageURISource, onPres
               <Text style={{
                 ...Platform.select({
                   android: {
-                    fontFamily: 'Raleway 600'
+                    fontFamily: 'Raleway 700'
                   },
                   ios: {
                     fontFamily: 'Raleway',
-                    fontWeight: '600'
+                    fontWeight: '700'
                   }
                 }),
-                fontSize: 20,
-                color: '#616485',
-                textAlign: 'center'
-              }}>
+                textAlign: 'center',
+                lineHeight: 25,
+                opacity: 0.75
+              }} category={'h5'}>
                 {props.title}
               </Text>
             </View>
@@ -76,15 +76,15 @@ export function EventCard(props: { title: string, image?: ImageURISource, onPres
                   fontWeight: '700'
                 }
               }),
-              fontSize: 20,
-              color: '#616485',
-              textAlign: 'center'
-            }}>
+              textAlign: 'center',
+              lineHeight: 25,
+              opacity: 0.75
+            }} category={'h5'}>
               {props.title}
             </Text>
           </View>
         )}
-      </View>
+      </Layout>
     </TouchableOpacity>
   )
 }

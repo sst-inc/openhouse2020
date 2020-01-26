@@ -22,8 +22,7 @@ import {registerUserFirebase, userLogIn} from "../../functions/user";
 import {NavigationInjectedProps} from "react-navigation";
 import {Spinner, Text, Layout} from "@ui-kitten/components";
 import {GOOGLE_WEB_API_KEY} from "../../../config";
-import {GLOBAL} from "../../../database/global";
-import {updateAppTheme} from "../../functions/theme";
+import {ThemeContext} from "../../functions/theme";
 
 interface LandingPageState {
   appleAuth: boolean;
@@ -136,7 +135,7 @@ class LandingPage extends Component<NavigationInjectedProps, LandingPageState> {
 
   render() {
     return (
-      <Layout level='3' style={{
+      <Layout style={{
         flex: 1
       }}>
         <StatusBar barStyle={"light-content"} backgroundColor={"#2B32B2"}/>
@@ -152,12 +151,12 @@ class LandingPage extends Component<NavigationInjectedProps, LandingPageState> {
           }}>
             <View style={{
               flex: 1,
-              paddingLeft: 25
+              paddingLeft: 25,
             }}>
               <Image source={landingCode} style={{
                 resizeMode: 'contain',
                 height: '100%',
-                width: '100%'
+                width: '100%',
               }}/>
             </View>
             <View style={{
@@ -202,64 +201,67 @@ class LandingPage extends Component<NavigationInjectedProps, LandingPageState> {
                   <Spinner size={'giant'} status={'danger'}/>
                 </View>
               ) : (
-                <>
-                  {this.state.appleAuth ? (
-                    <AppleAuthentication.AppleAuthenticationButton
-                      buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
-                      buttonStyle={GLOBAL.app ? GLOBAL.app.state.dark ? AppleAuthentication.AppleAuthenticationButtonStyle.WHITE : AppleAuthentication.AppleAuthenticationButtonStyle.BLACK : AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
-                      cornerRadius={2}
-                      style={{
-                        width: (Dimensions.get('window').width - 50) * 0.7 - 8,
-                        height: 40,
-                        marginTop: 30
-                      }}
-                      onPress={() => {
-                        this._appleSignIn()
-                      }}
+                <ThemeContext.Consumer>{theme =>
+                  <>
+                    {this.state.appleAuth ? (
+                      <AppleAuthentication.AppleAuthenticationButton
+                        buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+                        buttonStyle={theme.theme === 'light' ? AppleAuthentication.AppleAuthenticationButtonStyle.BLACK : AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
+                        cornerRadius={2}
+                        style={{
+                          width: (Dimensions.get('window').width - 50) * 0.7 - 8,
+                          height: 40,
+                          marginTop: 30
+                        }}
+                        onPress={() => {
+                          this._appleSignIn()
+                        }}
+                      />
+                    ) : null}
+                    <GoogleSigninButton onPress={() => this._googleSignIn()} style={{
+                      ...Platform.select({
+                        android: {
+                          marginTop: 30,
+                        },
+                        ios: {
+                          marginTop: 15,
+                          marginLeft: -4
+                        }
+                      }),
+                      width: '70%',
+                    }} size={GoogleSigninButton.Size.Wide}
+                                        color={theme.theme === 'light' ? GoogleSigninButton.Color.Dark : GoogleSigninButton.Color.Light}
                     />
-                  ) : null}
-                  <GoogleSigninButton onPress={() => this._googleSignIn()} style={{
-                    ...Platform.select({
-                      android: {
-                        marginTop: 30,
-                      },
-                      ios: {
-                        marginTop: 15,
-                        marginLeft: -4
-                      }
-                    }),
-                    width: '70%',
-                  }} size={GoogleSigninButton.Size.Wide}
-                  color={GLOBAL.app ? GLOBAL.app.state.dark ? GoogleSigninButton.Color.Light : GoogleSigninButton.Color.Dark : GoogleSigninButton.Color.Light}/>
-                  <SafeAreaView style={{
-                    alignItems: 'flex-end',
-                    justifyContent: 'flex-end',
-                    marginTop: 15,
-                    marginBottom: 15
-                  }}>
-                    <TouchableOpacity onPress={() => {
-                      // userLogIn().then(() => {
-                      //   this._transition()
-                      // })
-                      updateAppTheme('dark')
+                    <SafeAreaView style={{
+                      alignItems: 'flex-end',
+                      justifyContent: 'flex-end',
+                      marginTop: 15,
+                      marginBottom: 15
                     }}>
-                      <Text category={'p1'} style={{
-                        ...Platform.select({
-                          ios: {
-                            fontWeight: '500',
-                            fontFamily: 'Raleway'
-                          },
-                          android: {
-                            fontWeight: undefined,
-                            fontFamily: 'Raleway 500'
-                          },
-                        }),
-                        opacity: 0.7
+                      <TouchableOpacity onPress={() => {
+                        userLogIn().then(() => {
+                          this._transition()
+                        })
                       }}>
-                        skip
-                      </Text>
-                    </TouchableOpacity>
-                  </SafeAreaView></>
+                        <Text category={'p1'} style={{
+                          ...Platform.select({
+                            ios: {
+                              fontWeight: '500',
+                              fontFamily: 'Raleway'
+                            },
+                            android: {
+                              fontWeight: undefined,
+                              fontFamily: 'Raleway 500'
+                            },
+                          }),
+                          opacity: 0.7
+                        }}>
+                          skip
+                        </Text>
+                      </TouchableOpacity>
+                    </SafeAreaView>
+                  </>
+                }</ThemeContext.Consumer>
               )}
             </View>
           </SafeAreaView>

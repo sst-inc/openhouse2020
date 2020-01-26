@@ -1,14 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
-  Text,
   SafeAreaView,
-  Image,
   StatusBar,
   Platform,
   ScrollView, TouchableOpacity,
 } from 'react-native';
-import Push from 'appcenter-push';
 import {HeaderSmall} from '../../components/Text/HeaderSmall';
 import {Header} from '../../components/Text/Header';
 //@ts-ignore
@@ -21,9 +18,12 @@ import {EventCard} from "../../components/Card/Event";
 // @ts-ignore
 import anniversaryConfetti from '../../../assets/images/anniversary_confetti.png'
 // @ts-ignore
-import Icon from 'react-native-vector-icons/Ionicons'
+import {Layout, Icon, withStyles} from "@ui-kitten/components";
+import {ThemedIcon} from "../../components/Icon/ThemedIcon";
+import {ThemeContext} from "../../functions/theme";
 
 class HomePage extends React.Component<NavigationInjectedProps> {
+  static contextType = ThemeContext
   static navigationOptions = {
     header: null,
   };
@@ -31,7 +31,7 @@ class HomePage extends React.Component<NavigationInjectedProps> {
 
   render() {
     return (
-      <View
+      <Layout
         style={{
           flex: 1,
         }}>
@@ -86,11 +86,15 @@ class HomePage extends React.Component<NavigationInjectedProps> {
               justifyContent: 'flex-end',
               flexDirection: 'row'
             }}>
-              <TouchableOpacity>
-                <Icon name={'ios-search'} size={30}/>
-              </TouchableOpacity>
+              <ThemeContext.Consumer>
+                {theme => <TouchableOpacity style={{marginRight: 15}} onPress={() => {
+                  theme.toggleTheme()
+                }}>
+                  <ThemedIcon name={"search"} size={30}/>
+                </TouchableOpacity>}
+              </ThemeContext.Consumer>
               <TouchableOpacity onPress={() => this.props.navigation.openDrawer()}>
-                <View style={{
+                <Layout style={{
                   padding: 10,
                   borderRadius: 25,
                   elevation: 10,
@@ -98,15 +102,14 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                   shadowOffset: {width: 0, height: 0},
                   shadowOpacity: 0.16,
                   shadowRadius: 10,
-                  backgroundColor: 'white',
                   width: 50,
                   height: 50,
                   alignItems: 'center',
                   justifyContent: 'center',
                   marginLeft: 20
                 }}>
-                  <Icon name={'ios-menu'} size={30}/>
-                </View>
+                  <ThemedIcon name={'menu'} size={30}/>
+                </Layout>
               </TouchableOpacity>
             </View>
           </View>
@@ -137,6 +140,7 @@ class HomePage extends React.Component<NavigationInjectedProps> {
               }}
             />
             <Header
+              variant={4}
               style={{
                 ...Platform.select({
                   ios: {
@@ -148,9 +152,7 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                     fontFamily: 'Raleway 700',
                   },
                 }),
-                opacity: 0.7,
                 marginTop: 20,
-                fontSize: 25,
               }}>
               Categories
             </Header>
@@ -161,9 +163,9 @@ class HomePage extends React.Component<NavigationInjectedProps> {
           colors={['#E60233', '#0077C8', '#5F6A72']}
           duration={3000}
         />
-      </View>
+      </Layout>
     );
   }
 }
 
-export default HomePage;
+export default HomePage

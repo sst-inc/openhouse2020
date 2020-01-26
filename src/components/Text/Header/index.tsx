@@ -1,6 +1,14 @@
-import styled from 'styled-components/native'
+import React from 'react'
+import {Text} from "@ui-kitten/components";
+import {TextStyle} from "react-native";
 
-export const Header = styled.Text`
-  color: black;
-  font-size: 30px;
-`;
+export function Header(props: {children?: string, style?: TextStyle, variant?: number}) {
+  return (
+    <Text category={`h${props.variant || 1}`} style={{
+      textTransform: 'capitalize',
+      ...props.style
+    }}>
+      {props.children}
+    </Text>
+  )
+}

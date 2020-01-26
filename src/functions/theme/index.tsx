@@ -1,7 +1,10 @@
-import {GLOBAL} from "../../../database/global";
+import React from "react";
 
-export function updateAppTheme(theme: 'dark' | 'light') {
-  if (GLOBAL.app) {
-    GLOBAL.app.setState({dark: theme === 'dark'})
-  }
+export function processTheme(theme: Object): string {
+  return Object.values(theme).reduce((a, b) => a + b)
 }
+
+export const ThemeContext = React.createContext({
+  theme: 'light',
+  toggleTheme: () => {},
+});
