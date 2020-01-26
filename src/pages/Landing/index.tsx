@@ -6,16 +6,13 @@ import {
   Platform,
   SafeAreaView,
   StatusBar,
-  Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View
 } from 'react-native';
-import firestore from '@react-native-firebase/firestore';
 import {Button} from 'react-native-paper';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import {GoogleSignin, GoogleSigninButton, statusCodes} from '@react-native-community/google-signin';
-import LinearGradient from 'react-native-linear-gradient';
 import Alert from '../../components/Alert'
 import * as AppleAuthentication from 'expo-apple-authentication';
 import {AppleAuthenticationScope} from 'expo-apple-authentication';
@@ -23,8 +20,10 @@ import {AppleAuthenticationScope} from 'expo-apple-authentication';
 import landingCode from '../../../assets/images/landing_code.png'
 import {registerUserFirebase, userLogIn} from "../../functions/user";
 import {NavigationInjectedProps} from "react-navigation";
-import {Spinner} from "react-native-ui-kitten";
+import {Spinner, Text, Layout} from "@ui-kitten/components";
 import {GOOGLE_WEB_API_KEY} from "../../../config";
+import {GLOBAL} from "../../../database/global";
+import {updateAppTheme} from "../../functions/theme";
 
 interface LandingPageState {
   appleAuth: boolean;
@@ -137,8 +136,7 @@ class LandingPage extends Component<NavigationInjectedProps, LandingPageState> {
 
   render() {
     return (
-      <View style={{
-        backgroundColor: '#0055C8',
+      <Layout level='3' style={{
         flex: 1
       }}>
         <StatusBar barStyle={"light-content"} backgroundColor={"#2B32B2"}/>
@@ -167,9 +165,7 @@ class LandingPage extends Component<NavigationInjectedProps, LandingPageState> {
               paddingRight: 25,
               justifyContent: 'center',
             }}>
-              <Text style={{
-                fontSize: 40,
-                color: 'white',
+              <Text category={'h1'} style={{
                 ...Platform.select({
                   ios: {
                     fontWeight: 'bold',
@@ -181,11 +177,9 @@ class LandingPage extends Component<NavigationInjectedProps, LandingPageState> {
                   },
                 }),
               }}>
-                Hey,
+                Hello,
               </Text>
-              <Text style={{
-                fontSize: 30,
-                color: 'white',
+              <Text category={'h2'} style={{
                 ...Platform.select({
                   ios: {
                     fontWeight: 'bold',
@@ -212,7 +206,7 @@ class LandingPage extends Component<NavigationInjectedProps, LandingPageState> {
                   {this.state.appleAuth ? (
                     <AppleAuthentication.AppleAuthenticationButton
                       buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
-                      buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
+                      buttonStyle={GLOBAL.app ? GLOBAL.app.state.dark ? AppleAuthentication.AppleAuthenticationButtonStyle.WHITE : AppleAuthentication.AppleAuthenticationButtonStyle.BLACK : AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
                       cornerRadius={2}
                       style={{
                         width: (Dimensions.get('window').width - 50) * 0.7 - 8,
@@ -235,7 +229,8 @@ class LandingPage extends Component<NavigationInjectedProps, LandingPageState> {
                       }
                     }),
                     width: '70%',
-                  }} size={GoogleSigninButton.Size.Wide}/>
+                  }} size={GoogleSigninButton.Size.Wide}
+                  color={GLOBAL.app ? GLOBAL.app.state.dark ? GoogleSigninButton.Color.Light : GoogleSigninButton.Color.Dark : GoogleSigninButton.Color.Light}/>
                   <SafeAreaView style={{
                     alignItems: 'flex-end',
                     justifyContent: 'flex-end',
@@ -243,15 +238,23 @@ class LandingPage extends Component<NavigationInjectedProps, LandingPageState> {
                     marginBottom: 15
                   }}>
                     <TouchableOpacity onPress={() => {
-                      userLogIn().then(() => {
-                        this._transition()
-                      })
+                      // userLogIn().then(() => {
+                      //   this._transition()
+                      // })
+                      updateAppTheme('dark')
                     }}>
-                      <Text style={{
-                        fontFamily: 'Raleway',
-                        color: 'white',
-                        fontWeight: '600',
-                        fontSize: 15
+                      <Text category={'p1'} style={{
+                        ...Platform.select({
+                          ios: {
+                            fontWeight: '500',
+                            fontFamily: 'Raleway'
+                          },
+                          android: {
+                            fontWeight: undefined,
+                            fontFamily: 'Raleway 500'
+                          },
+                        }),
+                        opacity: 0.7
                       }}>
                         skip
                       </Text>
@@ -261,7 +264,7 @@ class LandingPage extends Component<NavigationInjectedProps, LandingPageState> {
             </View>
           </SafeAreaView>
         </TouchableWithoutFeedback>
-      </View>
+      </Layout>
     )
   }
 }

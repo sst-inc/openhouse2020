@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import {Spinner} from 'react-native-ui-kitten'
+import {Spinner} from '@ui-kitten/components'
 import {checkUserLoggedIn} from "../functions/user";
 import {NavigationInjectedProps} from "react-navigation";
 

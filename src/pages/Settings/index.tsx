@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Text} from 'react-native-ui-kitten'
+import {Button, Text} from '@ui-kitten/components'
 import {Platform, SafeAreaView, View} from "react-native";
 import {HeaderSmall} from "../../components/Text/HeaderSmall";
 import {Header} from "../../components/Text/Header";

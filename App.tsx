@@ -3,8 +3,8 @@ import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import codePush from "react-native-code-push";
 import LandingPage from "./src/pages/Landing";
-import {mapping, light} from '@eva-design/eva';
-import {ApplicationProvider} from 'react-native-ui-kitten';
+import {mapping, light, dark} from '@eva-design/eva';
+import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {Provider as PaperProvider} from 'react-native-paper';
 import HomePage from "./src/pages/Home";
 import AppLoading from "./src/pages/AppLoading";
@@ -14,7 +14,15 @@ import Push from 'appcenter-push';
 // @ts-ignore
 import Notifications, {NotificationsAndroid} from 'react-native-notifications';
 import {Platform} from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import SettingsPage from "./src/pages/Settings";
+//@ts-ignore
+import customTheme from './assets/theme/custom-theme.json'
+import {EvaIconsPack} from '@ui-kitten/eva-icons';
+import {Text} from "@ui-kitten/components";
+import {GLOBAL} from "./database/global";
+//@ts-ignore
+import customMapping from './assets/theme/custom-mapping.json'
 
 const AppNavigator = createStackNavigator({
   Home: {
@@ -52,8 +60,27 @@ const Switch = createSwitchNavigator({
 
 const AppContainer = createAppContainer(Switch)
 
-class App extends React.Component {
+export interface AppState {
+  dark: boolean;
+}
+
+class App extends React.Component<{}, AppState> {
+  state = {
+    dark: false
+  }
+
+  componentDidUpdate(prevProps: Readonly<{}>, prevState: Readonly<AppState>, snapshot?: any): void {
+    if (prevState.dark !== this.state.dark) {
+      AsyncStorage.setItem("theme", this.state.dark ? "dark" : 'light')
+    }
+  }
+
   componentDidMount(): void {
+    AsyncStorage.getItem("theme").then((theme) => {
+      if (theme) {
+        this.setState({dark: theme === 'dark'})
+      }
+    })
     Push.setListener({
       onPushNotificationReceived: function (pushNotification) {
         let message = pushNotification.message;
@@ -76,9 +103,13 @@ class App extends React.Component {
   }
 
   render() {
+    GLOBAL.app = this
     return (
       <PaperProvider>
-        <ApplicationProvider mapping={mapping} theme={light}>
+        <IconRegistry icons={EvaIconsPack}/>
+        <ApplicationProvider mapping={mapping}
+                             customMapping={customMapping}
+                             theme={{...customTheme, ...this.state.dark ? dark : light}}>
           <AppContainer/>
         </ApplicationProvider>
       </PaperProvider>
