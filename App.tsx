@@ -4,7 +4,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import codePush from "react-native-code-push";
 import LandingPage from "./src/pages/Landing";
 import {mapping, light, dark} from '@eva-design/eva';
-import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
+import {ApplicationProvider, IconRegistry, Drawer, Layout} from '@ui-kitten/components';
 import {Provider as PaperProvider} from 'react-native-paper';
 import HomePage from "./src/pages/Home";
 import AppLoading from "./src/pages/AppLoading";
@@ -13,7 +13,7 @@ import {createDrawerNavigator} from "react-navigation-drawer";
 import Push from 'appcenter-push';
 // @ts-ignore
 import Notifications, {NotificationsAndroid} from 'react-native-notifications';
-import {Platform} from "react-native";
+import {Platform, SafeAreaView} from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import SettingsPage from "./src/pages/Settings";
 //@ts-ignore
@@ -23,6 +23,21 @@ import {Text} from "@ui-kitten/components";
 //@ts-ignore
 import customMapping from './assets/theme/custom-mapping.json'
 import {ThemeContext} from "./src/functions/theme";
+
+const DrawerComponent = ({ navigation }: any) => {
+  const onSelect = (index: any) => {
+    const { [index]: selectedTabRoute } = navigation.state.routes;
+    navigation.navigate(selectedTabRoute.routeName);
+  };
+
+  return (
+    <Layout style={{flex: 1}}>
+      <SafeAreaView>
+        <Drawer data={[{ title: 'Home' }, { title: 'Settings' }]} onSelect={onSelect} />
+      </SafeAreaView>
+    </Layout>
+  );
+};
 
 const AppNavigator = createStackNavigator({
   Home: {
@@ -41,7 +56,8 @@ const DrawerNavigator = createDrawerNavigator({
     screen: SettingsPage
   }
 }, {
-  drawerPosition: 'right'
+  drawerPosition: 'right',
+  contentComponent: DrawerComponent
 })
 
 const AuthNavigator = createStackNavigator({
