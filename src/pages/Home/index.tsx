@@ -24,6 +24,8 @@ import {ThemeContext} from "../../functions/theme";
 // @ts-ignore
 import gettingToSST from '../../../assets/images/getting_to_sst.png'
 import {CategoryCard} from "../../components/Card/Category";
+import {ViewShadow} from "../../components/Shadow/View";
+import {TouchableShadow} from "../../components/Shadow/Touchable";
 
 class HomePage extends React.Component<NavigationInjectedProps> {
   static contextType = ThemeContext
@@ -98,15 +100,10 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                   <ThemedIcon name={"search"} size={30}/>
                 </TouchableOpacity>}
               </ThemeContext.Consumer>
-              <TouchableOpacity onPress={() => this.props.navigation.openDrawer()}>
+              <TouchableShadow onPress={() => this.props.navigation.openDrawer()}>
                 <Layout style={{
                   padding: 10,
                   borderRadius: 25,
-                  elevation: 10,
-                  shadowColor: 'black',
-                  shadowOffset: {width: 0, height: 0},
-                  shadowOpacity: 0.16,
-                  shadowRadius: 10,
                   width: 50,
                   height: 50,
                   alignItems: 'center',
@@ -115,7 +112,7 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                 }}>
                   <ThemedIcon name={'menu'} size={30}/>
                 </Layout>
-              </TouchableOpacity>
+              </TouchableShadow>
             </View>
           </View>
           <ScrollView
@@ -135,20 +132,17 @@ class HomePage extends React.Component<NavigationInjectedProps> {
               />
               <ThemeContext.Consumer>
                 {theme => <EventCard
-                  style={{
-                    backgroundColor: theme.theme === 'light' ? 'rgba(18, 113, 237, 0.24)' : '#0D57CB'
-                  }}
                   onPress={() => {
                     this.props.navigation.navigate("Anniversary")
                   }}
                 >
                   <View style={{
-                    marginLeft: 25,
-                    marginRight: 25,
+                    paddingHorizontal:25,
                     flex: 1,
                     alignItems: 'center',
                     flexDirection: 'row',
                     justifyContent: 'space-between',
+                    backgroundColor: theme.theme === 'light' ? 'rgba(18, 113, 237, 0.24)' : '#0D57CB'
                   }}>
                     <Text category={'h5'} style={{
                       opacity: 0.75,

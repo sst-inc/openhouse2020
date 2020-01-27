@@ -4,19 +4,11 @@ import React from 'react';
 import {ImageURISource, View, TouchableOpacity, Platform} from 'react-native';
 import {Layout, Text, Icon} from '@ui-kitten/components';
 import {ThemedIcon} from "../../Icon/ThemedIcon";
+import {TouchableShadow} from "../../Shadow/Touchable";
 
 export function CategoryCard(props: { title: string; icon: string; onPress(): void; }) {
   return (
-    <TouchableOpacity style={{
-      ...Platform.select({
-        ios: {
-          elevation: 10,
-          shadowColor: 'gray',
-          shadowOffset: {width: 0, height: 0},
-          shadowOpacity: 0.25,
-          shadowRadius: 5,
-        }
-      }),
+    <TouchableShadow style={{
       marginRight: 25,
     }}>
       <Layout
@@ -33,7 +25,8 @@ export function CategoryCard(props: { title: string; icon: string; onPress(): vo
             }
           }),
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          borderRadius: 5
         }}>
         <ThemedIcon name={props.icon} size={40}/>
         <Text
@@ -53,6 +46,6 @@ export function CategoryCard(props: { title: string; icon: string; onPress(): vo
           {props.title}
         </Text>
       </Layout>
-    </TouchableOpacity>
+    </TouchableShadow>
   );
 };

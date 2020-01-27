@@ -6,18 +6,14 @@ import {Subtitle} from "../../Text/Subtitle";
 import {PrimaryButton} from "../../Button/Primary";
 import {withStyles} from '@ui-kitten/components';
 import {processTheme, ThemeContext} from "../../../functions/theme";
+import {ViewShadow} from "../../Shadow/View";
 
 function SEC(props: { image?: any; title: string; subtitle?: string; time: string; gradient?: string[], themedStyle?: any }) {
   return (
-    <View style={{
+    <ViewShadow style={{
       width: '100%',
       borderRadius: 5,
-      elevation: 10,
-      shadowColor: 'gray',
-      shadowOffset: {width: 0, height: 0},
-      shadowOpacity: 0.25,
-      shadowRadius: 10,
-      backgroundColor: 'white',
+      backgroundColor: 'white'
     }}>
       <ThemeContext.Consumer>
         {theme => <LinearGradient angle={135} useAngle={true}
@@ -89,7 +85,7 @@ function SEC(props: { image?: any; title: string; subtitle?: string; time: strin
           </View>
         </LinearGradient>}
       </ThemeContext.Consumer>
-    </View>
+    </ViewShadow>
   )
 }
 
