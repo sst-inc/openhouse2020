@@ -4,7 +4,7 @@ import {
   SafeAreaView,
   StatusBar,
   Platform,
-  ScrollView, TouchableOpacity,
+  ScrollView, TouchableOpacity, Image,
 } from 'react-native';
 import {HeaderSmall} from '../../components/Text/HeaderSmall';
 import {Header} from '../../components/Text/Header';
@@ -18,9 +18,11 @@ import {EventCard} from "../../components/Card/Event";
 // @ts-ignore
 import anniversaryConfetti from '../../../assets/images/anniversary_confetti.png'
 // @ts-ignore
-import {Layout, Icon, withStyles} from "@ui-kitten/components";
+import {Layout, Icon, withStyles, Text} from "@ui-kitten/components";
 import {ThemedIcon} from "../../components/Icon/ThemedIcon";
 import {ThemeContext} from "../../functions/theme";
+// @ts-ignore
+import gettingToSST from '../../../assets/images/getting_to_sst.png'
 
 class HomePage extends React.Component<NavigationInjectedProps> {
   static contextType = ThemeContext
@@ -126,12 +128,51 @@ class HomePage extends React.Component<NavigationInjectedProps> {
               subtitle={'Auditorium'}
               time={`10.30am to\n11.30am`}
             />
-            <EventCard
-              title={`Driving to SST?`}
-              onPress={() => {
-                this.props.navigation.navigate("Anniversary")
-              }}
-            />
+            <ThemeContext.Consumer>
+              {theme => <EventCard
+                style={{
+                  backgroundColor: theme.theme === 'light' ? 'rgba(18, 113, 237, 0.24)' : '#0D57CB'
+                }}
+                onPress={() => {
+                  this.props.navigation.navigate("Anniversary")
+                }}
+              >
+                <View style={{
+                  marginLeft: 25,
+                  marginRight: 25,
+                  flex: 1,
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
+                  <Text category={'h5'} style={{
+                    opacity: 0.75,
+                    ...Platform.select({
+                      android: {
+                        fontFamily: 'Raleway 700'
+                      },
+                      ios: {
+                        fontFamily: 'Raleway',
+                        fontWeight: '700'
+                      }
+                    }),
+                    lineHeight: 25,
+                    marginTop: 20,
+                    marginBottom: 20,
+                  }}>{`Getting to\nSST`}
+                  </Text>
+                  <View style={{
+                    marginTop: 5,
+                    marginBottom: 5,
+                  }}>
+                    <Image source={gettingToSST} style={{
+                      resizeMode: 'contain',
+                      height: '100%',
+                    }}/>
+                  </View>
+                </View>
+              </EventCard>}
+            </ThemeContext.Consumer>
             <EventCard
               image={anniversaryConfetti}
               title={`10 Years of\nTransforming Learning`}

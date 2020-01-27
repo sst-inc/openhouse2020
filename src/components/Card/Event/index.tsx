@@ -1,8 +1,8 @@
-import React from 'react';
-import {ImageBackground, ImageURISource, Platform, TouchableOpacity, View} from "react-native";
+import React, {ReactNode} from 'react';
+import {ImageBackground, ImageURISource, Platform, TouchableOpacity, View, ViewStyle} from "react-native";
 import {Layout, Text} from "@ui-kitten/components";
 
-export function EventCard(props: { title: string, image?: ImageURISource, onPress(): void }) {
+export function EventCard(props: { title?: string, image?: ImageURISource, onPress(): void; children?: ReactNode; style?: ViewStyle }) {
   return (
     <TouchableOpacity onPress={() => {
       if (props.onPress) {
@@ -32,9 +32,11 @@ export function EventCard(props: { title: string, image?: ImageURISource, onPres
             shadowOpacity: 0.5,
             shadowRadius: 10,
           }
-        })
+        }),
+        ...props.style
       }}>
-        {props.image ? (
+        {props.children ||
+        <>{props.image ? (
           <ImageBackground source={props.image} style={{
             width: '100%', alignItems: 'center',
             justifyContent: 'center',
@@ -83,7 +85,7 @@ export function EventCard(props: { title: string, image?: ImageURISource, onPres
               {props.title}
             </Text>
           </View>
-        )}
+        )}</>}
       </Layout>
     </TouchableOpacity>
   )
