@@ -4,7 +4,7 @@ import {
   SafeAreaView,
   StatusBar,
   Platform,
-  ScrollView, TouchableOpacity, Image,
+  ScrollView, TouchableOpacity, Image, FlatList,
 } from 'react-native';
 import {HeaderSmall} from '../../components/Text/HeaderSmall';
 import {Header} from '../../components/Text/Header';
@@ -23,6 +23,7 @@ import {ThemedIcon} from "../../components/Icon/ThemedIcon";
 import {ThemeContext} from "../../functions/theme";
 // @ts-ignore
 import gettingToSST from '../../../assets/images/getting_to_sst.png'
+import {CategoryCard} from "../../components/Card/Category";
 
 class HomePage extends React.Component<NavigationInjectedProps> {
   static contextType = ThemeContext
@@ -37,7 +38,9 @@ class HomePage extends React.Component<NavigationInjectedProps> {
         style={{
           flex: 1,
         }}>
-        <StatusBar barStyle={'dark-content'} backgroundColor={'white'}/>
+        <ThemeContext.Consumer>{theme =>
+          <StatusBar barStyle={theme.theme === 'light' ? 'dark-content' : 'light-content'}/>
+        }</ThemeContext.Consumer>
         <SafeAreaView
           style={{
             flex: 1,
@@ -118,85 +121,96 @@ class HomePage extends React.Component<NavigationInjectedProps> {
           <ScrollView
             contentContainerStyle={{
               paddingBottom: 25,
-              paddingRight: 25,
-              paddingLeft: 25,
               paddingTop: 25
             }}>
-            <SpecialEventCard
-              image={pvpTalk}
-              title={'PVP Talk'}
-              subtitle={'Auditorium'}
-              time={`10.30am to\n11.30am`}
-            />
-            <ThemeContext.Consumer>
-              {theme => <EventCard
-                style={{
-                  backgroundColor: theme.theme === 'light' ? 'rgba(18, 113, 237, 0.24)' : '#0D57CB'
-                }}
-                onPress={() => {
-                  this.props.navigation.navigate("Anniversary")
-                }}
-              >
-                <View style={{
-                  marginLeft: 25,
-                  marginRight: 25,
-                  flex: 1,
-                  alignItems: 'center',
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                }}>
-                  <Text category={'h5'} style={{
-                    opacity: 0.75,
-                    ...Platform.select({
-                      android: {
-                        fontFamily: 'Raleway 700'
-                      },
-                      ios: {
-                        fontFamily: 'Raleway',
-                        fontWeight: '700'
-                      }
-                    }),
-                    lineHeight: 25,
-                    marginTop: 20,
-                    marginBottom: 20,
-                  }}>{`Getting to\nSST`}
-                  </Text>
+            <View style={{
+              paddingLeft: 25,
+              paddingRight: 25
+            }}>
+              <SpecialEventCard
+                image={pvpTalk}
+                title={'PVP Talk'}
+                subtitle={'Auditorium'}
+                time={`10.30am to\n11.30am`}
+              />
+              <ThemeContext.Consumer>
+                {theme => <EventCard
+                  style={{
+                    backgroundColor: theme.theme === 'light' ? 'rgba(18, 113, 237, 0.24)' : '#0D57CB'
+                  }}
+                  onPress={() => {
+                    this.props.navigation.navigate("Anniversary")
+                  }}
+                >
                   <View style={{
-                    marginTop: 5,
-                    marginBottom: 5,
+                    marginLeft: 25,
+                    marginRight: 25,
+                    flex: 1,
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
                   }}>
-                    <Image source={gettingToSST} style={{
-                      resizeMode: 'contain',
-                      height: '100%',
-                    }}/>
+                    <Text category={'h5'} style={{
+                      opacity: 0.75,
+                      ...Platform.select({
+                        android: {
+                          fontFamily: 'Raleway 700'
+                        },
+                        ios: {
+                          fontFamily: 'Raleway',
+                          fontWeight: '700'
+                        }
+                      }),
+                      lineHeight: 25,
+                      marginTop: 20,
+                      marginBottom: 20,
+                    }}>{`Getting to\nSST`}
+                    </Text>
+                    <View style={{
+                      marginTop: 5,
+                      marginBottom: 5,
+                    }}>
+                      <Image source={gettingToSST} style={{
+                        resizeMode: 'contain',
+                        height: '100%',
+                      }}/>
+                    </View>
                   </View>
-                </View>
-              </EventCard>}
-            </ThemeContext.Consumer>
-            <EventCard
-              image={anniversaryConfetti}
-              title={`10 Years of\nTransforming Learning`}
-              onPress={() => {
-                this.props.navigation.navigate('Anniversary');
-              }}
-            />
-            <Header
-              variant={4}
-              style={{
-                ...Platform.select({
-                  ios: {
-                    fontWeight: '700',
-                    fontFamily: 'Raleway',
-                  },
-                  android: {
-                    fontWeight: undefined,
-                    fontFamily: 'Raleway 700',
-                  },
-                }),
-                marginTop: 20,
-              }}>
-              Categories
-            </Header>
+                </EventCard>}
+              </ThemeContext.Consumer>
+              <EventCard
+                image={anniversaryConfetti}
+                title={`10 Years of\nTransforming Learning`}
+                onPress={() => {
+                  this.props.navigation.navigate('Anniversary');
+                }}
+              />
+              <Header
+                variant={4}
+                style={{
+                  ...Platform.select({
+                    ios: {
+                      fontWeight: '700',
+                      fontFamily: 'Raleway',
+                    },
+                    android: {
+                      fontWeight: undefined,
+                      fontFamily: 'Raleway 700',
+                    },
+                  }),
+                  marginTop: 20,
+                }}>
+                Categories
+              </Header>
+            </View>
+            <FlatList showsHorizontalScrollIndicator={false} style={{padding: 25}} horizontal={true} data={[{title: 'Essential'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}]}
+                      keyExtractor={(item, index) => index.toString()} renderItem={({item}) => {
+              return (
+                <CategoryCard title={item.title} icon={'facebook'}
+                              onPress={() => {
+                              }}/>
+              )
+            }}/>
           </ScrollView>
         </SafeAreaView>
         <Confetti

@@ -16,7 +16,7 @@ export function EventCard(props: { title?: string, image?: ImageURISource, onPre
           elevation: 10,
           shadowColor: 'gray',
           shadowOffset: {width: 0, height: 0},
-          shadowOpacity: 0.5,
+          shadowOpacity: 0.25,
           shadowRadius: 10,
         }
       })
@@ -29,7 +29,7 @@ export function EventCard(props: { title?: string, image?: ImageURISource, onPre
             elevation: 10,
             shadowColor: 'gray',
             shadowOffset: {width: 0, height: 0},
-            shadowOpacity: 0.5,
+            shadowOpacity: 0.25,
             shadowRadius: 10,
           }
         }),
