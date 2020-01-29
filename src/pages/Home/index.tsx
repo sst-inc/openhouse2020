@@ -15,7 +15,6 @@ import pvpTalk from '../../../assets/images/pvp_talk.png';
 import {SpecialEventCard} from '../../components/Card/SpecialEvent';
 import {NavigationInjectedProps} from 'react-navigation';
 import {EventCard} from '../../components/Card/Event';
-import {EventCatCard} from '../../components/Card/EventCategory';
 
 // @ts-ignore
 import anniversaryConfetti from '../../../assets/images/anniversary_confetti.png';
@@ -26,6 +25,7 @@ import {ThemeContext} from '../../functions/theme';
 // @ts-ignore
 import gettingToSST from '../../../assets/images/getting_to_sst.png'
 import {CategoryCard} from "../../components/Card/Category";
+import {SearchCard} from "../../components/Card/Search";
 import {ViewShadow} from "../../components/Shadow/View";
 import {TouchableShadow} from "../../components/Shadow/Touchable";
 
@@ -212,6 +212,8 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                               }}/>
               )
             }}/>
+            <SearchCard title='PVP Talk' icon={'star'}
+                              onPress={() => {}} />
           </ScrollView>
         </SafeAreaView>
         <Confetti
