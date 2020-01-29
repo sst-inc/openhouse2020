@@ -1,4 +1,4 @@
-import {Icon, withStyles} from "@ui-kitten/components";
+import {Icon, withStyles, Text} from "@ui-kitten/components";
 import {processTheme, ThemeContext} from "../../../functions/theme";
 import React from "react";
 import {ViewStyle} from "react-native";

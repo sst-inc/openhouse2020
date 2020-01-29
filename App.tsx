@@ -98,7 +98,7 @@ class App extends React.Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      theme: 'dark'
+      theme: 'light'
     }
   }
 

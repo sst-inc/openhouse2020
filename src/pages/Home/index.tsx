@@ -14,22 +14,24 @@ import Confetti from 'react-native-confetti';
 import pvpTalk from '../../../assets/images/pvp_talk.png';
 import {SpecialEventCard} from '../../components/Card/SpecialEvent';
 import {NavigationInjectedProps} from 'react-navigation';
-import {EventCard} from "../../components/Card/Event";
+import {EventCard} from '../../components/Card/Event';
+
 // @ts-ignore
-import anniversaryConfetti from '../../../assets/images/anniversary_confetti.png'
+import anniversaryConfetti from '../../../assets/images/anniversary_confetti.png';
 // @ts-ignore
-import {Layout, Icon, withStyles, Text} from "@ui-kitten/components";
-import {ThemedIcon} from "../../components/Icon/ThemedIcon";
-import {ThemeContext} from "../../functions/theme";
+import {Layout, Icon, withStyles, Text} from '@ui-kitten/components';
+import {ThemedIcon} from '../../components/Icon/ThemedIcon';
+import {ThemeContext} from '../../functions/theme';
 // @ts-ignore
 import gettingToSST from '../../../assets/images/getting_to_sst.png'
 import {CategoryCard} from "../../components/Card/Category";
+import {SearchCard} from "../../components/Card/Search";
 import {ViewShadow} from "../../components/Shadow/View";
 import {TouchableShadow} from "../../components/Shadow/Touchable";
 import Events from '../../functions/events'
 
 class HomePage extends React.Component<NavigationInjectedProps> {
-  static contextType = ThemeContext
+  static contextType = ThemeContext;
   static navigationOptions = {
     header: null,
   };
@@ -60,7 +62,7 @@ class HomePage extends React.Component<NavigationInjectedProps> {
               paddingLeft: 25,
               paddingRight: 25,
               flexDirection: 'row',
-              alignItems: 'center'
+              alignItems: 'center',
             }}>
             <View>
               <HeaderSmall
@@ -94,18 +96,23 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                 Events
               </Header>
             </View>
-            <View style={{
-              flex: 1,
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              flexDirection: 'row'
-            }}>
+            <View
+              style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                flexDirection: 'row',
+              }}>
               <ThemeContext.Consumer>
-                {theme => <TouchableOpacity style={{marginRight: 15}} onPress={() => {
-                  theme.toggleTheme()
-                }}>
-                  <ThemedIcon name={"search"} size={30}/>
-                </TouchableOpacity>}
+                {theme => (
+                  <TouchableOpacity
+                    style={{marginRight: 15}}
+                    onPress={() => {
+                      theme.toggleTheme();
+                    }}>
+                    <ThemedIcon name={'search'} size={30} />
+                  </TouchableOpacity>
+                )}
               </ThemeContext.Consumer>
               <TouchableShadow onPress={() => this.props.navigation.openDrawer()}>
                 <Layout style={{
@@ -212,6 +219,8 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                               }}/>
               )
             }}/>
+            <SearchCard title='PVP Talk' icon={'star'}
+                              onPress={() => {}} />
           </ScrollView>
         </SafeAreaView>
         <Confetti
@@ -224,4 +233,4 @@ class HomePage extends React.Component<NavigationInjectedProps> {
   }
 }
 
-export default HomePage
+export default HomePage;
