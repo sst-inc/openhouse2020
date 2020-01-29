@@ -1,88 +1,60 @@
 // @Ryan
 
 import React from 'react';
-import {ImageURISource, View, TouchableOpacity, Platform} from 'react-native';
-import {Layout, Text, Icon} from '@ui-kitten/components';
-import {Svg, Line} from 'react-native-svg';
-import {ThemedIcon} from '../../Icon/ThemedIcon';
-import {TouchableShadow} from '../../Shadow/Touchable';
+import {View, Platform, ViewStyle, TextStyle} from 'react-native';
+import {Text} from '@ui-kitten/components';
 
 export function Timing(props: {
   upNext: string;
   duration: string;
-  likes: number;
+  likes: string;
 }) {
-  const textStyle = {
+  const TEXT_STYLE: TextStyle = {
     ...Platform.select({
       android: {
         fontFamily: 'Raleway 700',
-        textAlign: 'center',
       },
       ios: {
         fontFamily: 'Raleway',
         fontWeight: '700',
-        textAlign: 'center',
       },
-    }),
-  };
+    })
+  }
+  const SEPARATOR: ViewStyle = {
+    marginHorizontal: 15,
+    width: 1,
+    height: '70%',
+    backgroundColor: 'gray',
+    marginTop: 5
+  }
   return (
-    <Layout style={{flexDirection: 'row'}}>
-      <Layout style={{flexDirection: 'column'}}>
-        <Text
-          style={{
-            ...textStyle,
-            fontSize: 20,
-          }}>
+    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <View style={{alignItems: 'center'}}>
+        <Text category={'h6'} style={[TEXT_STYLE]}>
           {props.upNext}
         </Text>
-        <Text
-          style={{
-            ...textStyle,
-            color: '#717171',
-            fontSize: 10,
-          }}>
-          Up next
+        <Text category={'c1'} style={{marginTop: 3}} appearance={'hint'}>
+          Up Next
         </Text>
-      </Layout>
-      <Svg height="45" width="25">
-        <Line x1="12.5" y1="5" x2="12.5" y2="38" stroke="#717171" strokeWidth="1"/>
-      </Svg>
-      <Layout style={{flexDirection: 'column'}}>
-        <Text
-          style={{
-            ...textStyle,
-            fontSize: 20,
-          }}>
+      </View>
+      <View style={[SEPARATOR]}/>
+      <View style={{alignItems: 'center'}}>
+        <Text category={'h6'} style={[TEXT_STYLE]}>
           {props.duration}
         </Text>
-        <Text
-          style={{
-            ...textStyle,
-            color: '#717171',
-            fontSize: 10,
-          }}>
+        <Text category={'c1'} style={{marginTop: 3}} appearance={'hint'}>
           Duration
         </Text>
-      </Layout>
-      <Svg height="45" width="25">
-        <Line x1="12.5" y1="5" x2="12.5" y2="38" stroke="#717171" strokeWidth="1"/>
-      </Svg><Layout style={{flexDirection: 'column'}}>
-        <Text
-          style={{
-            ...textStyle,
-            fontSize: 20,
-          }}>
-          {props.likes.toString()}
+      </View>
+      <View style={[SEPARATOR]}/>
+      <View style={{alignItems: 'center'}}>
+        <Text category={'h6'} style={[TEXT_STYLE]}>
+          {props.likes}
         </Text>
-        <Text
-          style={{
-            ...textStyle,
-            color: '#717171',
-            fontSize: 10,
-          }}>
+        <Text category={'c1'} style={{marginTop: 3}} appearance={'hint'}>
           Likes
         </Text>
-      </Layout>
-    </Layout>
-  );
+      </View>
+    </View>
+  )
 }

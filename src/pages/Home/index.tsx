@@ -15,7 +15,6 @@ import pvpTalk from '../../../assets/images/pvp_talk.png';
 import {SpecialEventCard} from '../../components/Card/SpecialEvent';
 import {NavigationInjectedProps} from 'react-navigation';
 import {EventCard} from '../../components/Card/Event';
-
 // @ts-ignore
 import anniversaryConfetti from '../../../assets/images/anniversary_confetti.png';
 // @ts-ignore
@@ -25,10 +24,8 @@ import {ThemeContext} from '../../functions/theme';
 // @ts-ignore
 import gettingToSST from '../../../assets/images/getting_to_sst.png'
 import {CategoryCard} from "../../components/Card/Category";
-import {SearchCard} from "../../components/Card/Search";
-import {ViewShadow} from "../../components/Shadow/View";
+import {DetailCard} from "../../components/Card/Detail";
 import {TouchableShadow} from "../../components/Shadow/Touchable";
-import Events from '../../functions/events'
 
 class HomePage extends React.Component<NavigationInjectedProps> {
   static contextType = ThemeContext;
@@ -38,9 +35,9 @@ class HomePage extends React.Component<NavigationInjectedProps> {
   private _confettiView: any;
 
   componentDidMount(): void {
-    Events.getCategories().then((res) => {
-      alert(JSON.stringify(res))
-    })
+    // Events.getCategories().then((res) => {
+    //   alert(JSON.stringify(res))
+    // })
   }
 
   render() {
@@ -110,7 +107,7 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                     onPress={() => {
                       theme.toggleTheme();
                     }}>
-                    <ThemedIcon name={'search'} size={30} />
+                    <ThemedIcon name={'search'} size={30}/>
                   </TouchableOpacity>
                 )}
               </ThemeContext.Consumer>
@@ -151,7 +148,7 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                   }}
                 >
                   <View style={{
-                    paddingHorizontal:25,
+                    paddingHorizontal: 25,
                     flex: 1,
                     alignItems: 'center',
                     flexDirection: 'row',
@@ -211,7 +208,8 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                 Categories
               </Header>
             </View>
-            <FlatList showsHorizontalScrollIndicator={false} style={{padding: 25}} horizontal={true} data={[{title: 'Essential'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}]}
+            <FlatList showsHorizontalScrollIndicator={false} style={{padding: 25}} horizontal={true}
+                      data={[{title: 'Essential'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}]}
                       keyExtractor={(item, index) => index.toString()} renderItem={({item}) => {
               return (
                 <CategoryCard title={item.title} icon={'facebook'}
@@ -219,8 +217,34 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                               }}/>
               )
             }}/>
-            <SearchCard title='PVP Talk' icon={'star'}
-                              onPress={() => {}} />
+            <Layout level={'4'} style={{padding: 25}}>
+              <Header
+                variant={4}
+                style={{
+                  ...Platform.select({
+                    ios: {
+                      fontWeight: '700',
+                      fontFamily: 'Raleway',
+                    },
+                    android: {
+                      fontWeight: undefined,
+                      fontFamily: 'Raleway 700',
+                    },
+                  }),
+                  marginBottom: 20,
+                }}>
+                Upcoming Events
+              </Header>
+              {[1,1,1,1,1].map(() => {
+                return (
+                  <View style={{
+                    marginBottom: 15
+                  }}>
+                    <DetailCard title='PVP Talk' duration={'10m'} likes={'10'} upNext={'1400'} onPress={() => {}}/>
+                  </View>
+                )
+              })}
+            </Layout>
           </ScrollView>
         </SafeAreaView>
         <Confetti
