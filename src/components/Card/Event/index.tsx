@@ -1,39 +1,22 @@
 import React, {ReactNode} from 'react';
 import {ImageBackground, ImageURISource, Platform, TouchableOpacity, View, ViewStyle} from "react-native";
 import {Layout, Text} from "@ui-kitten/components";
+import {TouchableShadow} from "../../Shadow/Touchable";
 
 export function EventCard(props: { title?: string, image?: ImageURISource, onPress(): void; children?: ReactNode; style?: ViewStyle }) {
   return (
-    <TouchableOpacity onPress={() => {
+    <TouchableShadow onPress={() => {
       if (props.onPress) {
         props.onPress()
       }
     }} style={{
       width: '100%',
       marginTop: 15,
-      ...Platform.select({
-        ios: {
-          elevation: 10,
-          shadowColor: 'gray',
-          shadowOffset: {width: 0, height: 0},
-          shadowOpacity: 0.5,
-          shadowRadius: 10,
-        }
-      })
     }}>
       <Layout style={{
         borderRadius: 5,
         overflow: 'hidden',
-        ...Platform.select({
-          android: {
-            elevation: 10,
-            shadowColor: 'gray',
-            shadowOffset: {width: 0, height: 0},
-            shadowOpacity: 0.5,
-            shadowRadius: 10,
-          }
-        }),
-        ...props.style
+        ...props.style,
       }}>
         {props.children ||
         <>{props.image ? (
@@ -87,6 +70,6 @@ export function EventCard(props: { title?: string, image?: ImageURISource, onPre
           </View>
         )}</>}
       </Layout>
-    </TouchableOpacity>
+    </TouchableShadow>
   )
 }

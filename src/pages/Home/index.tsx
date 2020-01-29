@@ -4,9 +4,7 @@ import {
   SafeAreaView,
   StatusBar,
   Platform,
-  ScrollView,
-  TouchableOpacity,
-  Image,
+  ScrollView, TouchableOpacity, Image, FlatList,
 } from 'react-native';
 import {HeaderSmall} from '../../components/Text/HeaderSmall';
 import {Header} from '../../components/Text/Header';
@@ -26,8 +24,10 @@ import {Layout, Icon, withStyles, Text} from '@ui-kitten/components';
 import {ThemedIcon} from '../../components/Icon/ThemedIcon';
 import {ThemeContext} from '../../functions/theme';
 // @ts-ignore
-import gettingToSST from '../../../assets/images/getting_to_sst.png';
-import { FlatList } from 'react-native-gesture-handler';
+import gettingToSST from '../../../assets/images/getting_to_sst.png'
+import {CategoryCard} from "../../components/Card/Category";
+import {ViewShadow} from "../../components/Shadow/View";
+import {TouchableShadow} from "../../components/Shadow/Touchable";
 
 class HomePage extends React.Component<NavigationInjectedProps> {
   static contextType = ThemeContext;
@@ -42,7 +42,9 @@ class HomePage extends React.Component<NavigationInjectedProps> {
         style={{
           flex: 1,
         }}>
-        <StatusBar barStyle={'dark-content'} backgroundColor={'white'} />
+        <ThemeContext.Consumer>{theme =>
+          <StatusBar barStyle={theme.theme === 'light' ? 'dark-content' : 'light-content'}/>
+        }</ThemeContext.Consumer>
         <SafeAreaView
           style={{
             flex: 1,
@@ -105,149 +107,111 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                   </TouchableOpacity>
                 )}
               </ThemeContext.Consumer>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.openDrawer()}>
-                <Layout
-                  style={{
-                    padding: 10,
-                    borderRadius: 25,
-                    elevation: 10,
-                    shadowColor: 'black',
-                    shadowOffset: {width: 0, height: 0},
-                    shadowOpacity: 0.16,
-                    shadowRadius: 10,
-                    width: 50,
-                    height: 50,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginLeft: 20,
-                  }}>
-                  <ThemedIcon name={'menu'} size={30} />
+              <TouchableShadow onPress={() => this.props.navigation.openDrawer()}>
+                <Layout style={{
+                  padding: 10,
+                  borderRadius: 25,
+                  width: 50,
+                  height: 50,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginLeft: 20
+                }}>
+                  <ThemedIcon name={'menu'} size={30}/>
                 </Layout>
-              </TouchableOpacity>
+              </TouchableShadow>
             </View>
           </View>
           <ScrollView
             contentContainerStyle={{
               paddingBottom: 25,
-              paddingRight: 25,
-              paddingLeft: 25,
-              paddingTop: 25,
+              paddingTop: 25
             }}>
-            <SpecialEventCard
-              image={pvpTalk}
-              title={'PVP Talk'}
-              subtitle={'Auditorium'}
-              time={`10.30am to\n11.30am`}
-            />
-            <ThemeContext.Consumer>
-              {theme => (
-                <EventCard
-                  style={{
-                    backgroundColor:
-                      theme.theme === 'light'
-                        ? 'rgba(18, 113, 237, 0.24)'
-                        : '#0D57CB',
-                  }}
+            <View style={{
+              paddingLeft: 25,
+              paddingRight: 25
+            }}>
+              <SpecialEventCard
+                image={pvpTalk}
+                title={'PVP Talk'}
+                subtitle={'Auditorium'}
+                time={`10.30am to\n11.30am`}
+              />
+              <ThemeContext.Consumer>
+                {theme => <EventCard
                   onPress={() => {
-                    this.props.navigation.navigate('Anniversary');
+                    this.props.navigation.navigate("Anniversary")
+                  }}
+                >
+                  <View style={{
+                    paddingHorizontal:25,
+                    flex: 1,
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    backgroundColor: theme.theme === 'light' ? 'rgba(18, 113, 237, 0.24)' : '#0D57CB'
                   }}>
-                  <View
-                    style={{
-                      marginLeft: 25,
-                      marginRight: 25,
-                      flex: 1,
-                      alignItems: 'center',
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}>
-                    <Text
-                      category={'h5'}
-                      style={{
-                        opacity: 0.75,
-                        ...Platform.select({
-                          android: {
-                            fontFamily: 'Raleway 700',
-                          },
-                          ios: {
-                            fontFamily: 'Raleway',
-                            fontWeight: '700',
-                          },
-                        }),
-                        lineHeight: 25,
-                        marginTop: 20,
-                        marginBottom: 20,
-                      }}>
-                      {`Getting to\nSST`}
+                    <Text category={'h5'} style={{
+                      opacity: 0.75,
+                      ...Platform.select({
+                        android: {
+                          fontFamily: 'Raleway 700'
+                        },
+                        ios: {
+                          fontFamily: 'Raleway',
+                          fontWeight: '700'
+                        }
+                      }),
+                      lineHeight: 25,
+                      marginTop: 20,
+                      marginBottom: 20,
+                    }}>{`Getting to\nSST`}
                     </Text>
-                    <View
-                      style={{
-                        marginTop: 5,
-                        marginBottom: 5,
-                      }}>
-                      <Image
-                        source={gettingToSST}
-                        style={{
-                          resizeMode: 'contain',
-                          height: '100%',
-                        }}
-                      />
+                    <View style={{
+                      marginTop: 5,
+                      marginBottom: 5,
+                    }}>
+                      <Image source={gettingToSST} style={{
+                        resizeMode: 'contain',
+                        height: '100%',
+                      }}/>
                     </View>
                   </View>
-                </EventCard>
-              )}
-            </ThemeContext.Consumer>
-            <EventCard
-              image={anniversaryConfetti}
-              title={`10 Years of\nTransforming Learning`}
-              onPress={() => {
-                this.props.navigation.navigate('Anniversary');
-              }}
-            />
-            <Header
-              variant={4}
-              style={{
-                ...Platform.select({
-                  ios: {
-                    fontWeight: '700',
-                    fontFamily: 'Raleway',
-                  },
-                  android: {
-                    fontWeight: undefined,
-                    fontFamily: 'Raleway 700',
-                  },
-                }),
-                //app builds tho hmmm..........
-                marginTop: 20,
-              }}>
-              Categories
-            </Header>
-            <View
-            style={{
-              flexDirection: 'row'
-              }}>
-              <EventCatCard
-                title="Essential"
-                icon="book-outline"
+                </EventCard>}
+              </ThemeContext.Consumer>
+              <EventCard
+                image={anniversaryConfetti}
+                title={`10 Years of\nTransforming Learning`}
                 onPress={() => {
                   this.props.navigation.navigate('Anniversary');
                 }}
               />
-              <EventCatCard
-                title="Hands On"
-                icon="book-outline"
-                onPress={() => {
-                  this.props.navigation.navigate('Anniversary');
-                }}
-              />
-              <EventCatCard
-                title="Hands On"
-                icon="book-outline"
-                onPress={() => {
-                  this.props.navigation.navigate('Anniversary');
-                }}
-              />
+              <Header
+                variant={4}
+                style={{
+                  ...Platform.select({
+                    ios: {
+                      fontWeight: '700',
+                      fontFamily: 'Raleway',
+                    },
+                    android: {
+                      fontWeight: undefined,
+                      fontFamily: 'Raleway 700',
+                    },
+                  }),
+                  marginTop: 20,
+                }}>
+                Categories
+              </Header>
             </View>
+            <FlatList showsHorizontalScrollIndicator={false} style={{padding: 25}} horizontal={true} data={[{title: 'Essential'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}, {title: 'Hands On'}]}
+                      keyExtractor={(item, index) => index.toString()} renderItem={({item}) => {
+              return (
+                <CategoryCard title={item.title} icon={'facebook'}
+                              onPress={() => {
+                              }}/>
+              )
+            }}/>
           </ScrollView>
         </SafeAreaView>
         <Confetti
