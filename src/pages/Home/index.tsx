@@ -26,6 +26,7 @@ import gettingToSST from '../../../assets/images/getting_to_sst.png'
 import {CategoryCard} from "../../components/Card/Category";
 import {ViewShadow} from "../../components/Shadow/View";
 import {TouchableShadow} from "../../components/Shadow/Touchable";
+import Events from '../../functions/events'
 
 class HomePage extends React.Component<NavigationInjectedProps> {
   static contextType = ThemeContext
@@ -33,6 +34,12 @@ class HomePage extends React.Component<NavigationInjectedProps> {
     header: null,
   };
   private _confettiView: any;
+
+  componentDidMount(): void {
+    Events.getCategories().then((res) => {
+      alert(JSON.stringify(res))
+    })
+  }
 
   render() {
     return (

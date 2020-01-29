@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, SafeAreaView, Image} from 'react-native';
+import {Layout} from "@ui-kitten/components";
 //@ts-ignore
 import anniversary10 from '../../../assets/images/anniversary_10.png'
 
@@ -9,15 +10,21 @@ class AnniversaryPage extends React.Component {
     }
     render() {
         return (
-            <View style={{
+            <Layout style={{
                 flex: 1
             }}>
                 <SafeAreaView style={{
-                    flex: 1
+                    flex: 1,
                 }}>
-                    <Image source={anniversary10} style={{width: '100%', resizeMode: 'contain'}}/>
+                    <View style={{
+                        padding: 25,
+                        margin: 25,
+                        backgroundColor: 'white', borderRadius: 10
+                    }}>
+                        <Image source={anniversary10} style={{width: '100%', resizeMode: 'contain'}}/>
+                    </View>
                 </SafeAreaView>
-            </View>
+            </Layout>
         )
     }
 }

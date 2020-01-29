@@ -13,7 +13,7 @@ export function EventCard(props: { title?: string, image?: ImageURISource, onPre
       width: '100%',
       marginTop: 15,
     }}>
-      <Layout style={{
+      <Layout level={'2'} style={{
         borderRadius: 5,
         overflow: 'hidden',
         ...props.style,

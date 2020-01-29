@@ -25,7 +25,7 @@ import customMapping from './assets/theme/custom-mapping.json'
 import {ThemeContext} from "./src/functions/theme";
 import {ThemedIcon} from "./src/components/Icon/ThemedIcon";
 
-const drawerData: {title: string; icon: any}[] = [
+const drawerData: { title: string; icon: any }[] = [
   {
     title: "Home",
     icon: () => (<ThemedIcon name={'home-outline'} size={20} style={{marginRight: 15}}/>)
@@ -36,7 +36,7 @@ const drawerData: {title: string; icon: any}[] = [
   }
 ]
 
-const DrawerComponent = ({ navigation }: any) => {
+const DrawerComponent = ({navigation}: any) => {
   const onSelect = (index: any) => {
     const route = drawerData[index];
     navigation.navigate(route.title);
@@ -45,7 +45,7 @@ const DrawerComponent = ({ navigation }: any) => {
   return (
     <Layout style={{flex: 1}}>
       <SafeAreaView>
-        <Drawer data={drawerData} onSelect={onSelect} />
+        <Drawer data={drawerData} onSelect={onSelect}/>
       </SafeAreaView>
     </Layout>
   );
@@ -134,8 +134,9 @@ class App extends React.Component<{}, AppState> {
 
   _toggleTheme() {
     const nextTheme = this.state.theme === 'light' ? 'dark' : 'light';
-    AsyncStorage.setItem('theme', nextTheme)
-    this.setState({theme: nextTheme})
+    AsyncStorage.setItem('theme', nextTheme).then(() => {
+      this.setState({theme: nextTheme})
+    })
   }
 
   render() {

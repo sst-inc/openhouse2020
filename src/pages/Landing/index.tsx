@@ -1,3 +1,5 @@
+// TODO - anonymous signin for skip
+
 import React, {Component} from 'react';
 import {
   Dimensions,
