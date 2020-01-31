@@ -24,6 +24,7 @@ import {Text} from "@ui-kitten/components";
 import customMapping from './assets/theme/custom-mapping.json'
 import {ThemeContext} from "./src/functions/theme";
 import {ThemedIcon} from "./src/components/Icon/ThemedIcon";
+import SearchPage from "./src/pages/Search";
 
 const drawerData: { title: string; icon: any }[] = [
   {
@@ -57,6 +58,9 @@ const AppNavigator = createStackNavigator({
   },
   Anniversary: {
     screen: AnniversaryPage
+  },
+  Search: {
+    screen: SearchPage
   }
 });
 

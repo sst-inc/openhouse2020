@@ -28,7 +28,6 @@ import {DetailCard} from "../../components/Card/Detail";
 import {TouchableShadow} from "../../components/Shadow/Touchable";
 
 class HomePage extends React.Component<NavigationInjectedProps> {
-  static contextType = ThemeContext;
   static navigationOptions = {
     header: null,
   };
@@ -105,7 +104,7 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                   <TouchableOpacity
                     style={{marginRight: 15}}
                     onPress={() => {
-                      theme.toggleTheme();
+                      this.props.navigation.navigate("Search")
                     }}>
                     <ThemedIcon name={'search'} size={30}/>
                   </TouchableOpacity>
@@ -129,7 +128,7 @@ class HomePage extends React.Component<NavigationInjectedProps> {
           <ScrollView
             contentContainerStyle={{
               paddingBottom: 25,
-              paddingTop: 25
+              paddingTop: 20
             }}>
             <View style={{
               paddingLeft: 25,

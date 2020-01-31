@@ -4,6 +4,7 @@ import {Platform, SafeAreaView, View} from "react-native";
 import {HeaderSmall} from "../../components/Text/HeaderSmall";
 import {Header} from "../../components/Text/Header";
 import {userLogOut} from "../../functions/user";
+import { ThemeContext } from '../../functions/theme';
 
 class SettingsPage extends React.Component {
   render() {
@@ -33,6 +34,11 @@ class SettingsPage extends React.Component {
           }}>
             Sign out
           </Button>
+          <ThemeContext.Consumer>{theme =>
+          <Button onPress={() => theme.toggleTheme()}>
+            theme
+            </Button>
+          }</ThemeContext.Consumer>
         </SafeAreaView>
       </Layout>
     )
