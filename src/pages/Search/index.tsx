@@ -38,7 +38,7 @@ class SearchPage extends Component<NavigationInjectedProps, SearchPageState> {
               </TouchableOpacity>
               <View style={{
                 flex: 1,
-                marginLeft: 20
+                marginHorizontal: 15
               }}>
                 <Input placeholder={'Search...'} style={{marginTop: 4}} size={'large'}  textStyle={{color: 'gray'}} value={this.state.input} onChangeText={(input) => this.setState({input})}/>
               </View>

@@ -4,30 +4,11 @@ import {FlatList, Image, Platform, SafeAreaView, ScrollView, StatusBar, Touchabl
 import {HeaderSmall} from "../../components/Text/HeaderSmall";
 import {ThemeContext} from "../../functions/theme";
 import {Header} from "../../components/Text/Header";
-import {ThemedIcon} from "../../components/Icon/ThemedIcon";
-import {NavigationInjectedProps} from "react-navigation";
 
-interface CategoryEventsPageState {
-  selectedCategory: string;
-}
-
-class CategoryEventsPage extends Component<NavigationInjectedProps, CategoryEventsPageState> {
+class CategoryEventsPage extends Component {
   static navigationOptions = {
     header: null
   }
-  state = {
-    selectedCategory: ''
-  }
-
-  componentDidMount(): void {
-    const selected = this.props.navigation.getParam("selectedCategory")
-    if (!this.props.navigation.getParam("selectedCategory")) {
-      this.props.navigation.goBack()
-      return
-    }
-    this.setState({selectedCategory: selected})
-  }
-
   render() {
     return (
       <Layout
@@ -62,7 +43,7 @@ class CategoryEventsPage extends Component<NavigationInjectedProps, CategoryEven
                     },
                   }),
                 }}>
-                C A T E G O R I E S
+                D I S C O V E R
               </HeaderSmall>
               <Header
                 style={{
@@ -78,22 +59,8 @@ class CategoryEventsPage extends Component<NavigationInjectedProps, CategoryEven
                   }),
                   marginTop: 5,
                 }}>
-                {this.state.selectedCategory}
+                Events
               </Header>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                flexDirection: 'row',
-              }}>
-              <TouchableOpacity
-                onPress={() => {
-                  this.props.navigation.goBack()
-                }}>
-                <ThemedIcon name={'close'} size={30}/>
-              </TouchableOpacity>
             </View>
           </View>
         </SafeAreaView>
