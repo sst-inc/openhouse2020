@@ -33,6 +33,7 @@ import {DetailCard} from '../../components/Card/Detail';
 import {TouchableShadow} from '../../components/Shadow/Touchable';
 
 export function PageHeader(props: {
+  navigation: any;
   title: string;
   subtitle: string;
   searchTrue: boolean;
@@ -82,7 +83,6 @@ export function PageHeader(props: {
         <Header
           style={{
             fontSize: 30,
-            marginTop: 5,
             ...Platform.select({
               android: {
                 fontFamily: 'Raleway 700'

@@ -66,26 +66,26 @@ class HomePage extends React.Component<NavigationInjectedProps> {
             flex: 1,
           }}>
           <PageHeader
-            {...this.props}
+            navigation={this.props.navigation}
             title="Credits"
             subtitle="The App"
             searchTrue={false}
           />
           {/* Insert Image */}
           <Layout style={{paddingVertical: 40, paddingHorizontal: 20}}>
-            <Header style={{color: '#616485'}}>SST Inc.</Header>
-            <P style={{color: '#616485'}}>
+            <Header>SST Inc.</Header>
+            <P>
               Qin Guan {'\n'}Yee Jia Chen {'\n'}Jonathan Tan Jiayi {'\n'}Shannen
               Samuel Rajoo {'\n'}Ryan Theodore The {'\n'}
             </P>
-            <Header style={{color: '#616485'}}>Images</Header>
-            <P style={{color: '#616485'}}>
+            <Header>Images</Header>
+            <P>
             https://icons8.com/ouch/ {'\n'}https://undraw.co/ {'\n'}
             </P>
-            <Header style={{color: '#616485'}}>
+            <Header>
               Fonts
             </Header>
-            <P style={{color: '#616485'}}>
+            <P>
               IBM Plex Sans {'\n'}Raleway {'\n'}
             </P>
           </Layout>
