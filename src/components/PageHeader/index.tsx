@@ -36,21 +36,22 @@ export function PageHeader(props: {
   title: string;
   subtitle: string;
   searchTrue: boolean;
-  navigation: any;
 }) {
   const searchBar = props.searchTrue ? (
     <ThemeContext.Consumer>
-          {theme => (
-            <TouchableOpacity
-              style={{marginRight: 15}}
-              onPress={() => {
-                theme.toggleTheme();
-              }}>
-              <ThemedIcon name={'search'} size={30} />
-            </TouchableOpacity>
-          )}
-        </ThemeContext.Consumer>
-  ) : (<Layout />)
+      {theme => (
+        <TouchableOpacity
+          style={{marginRight: 15}}
+          onPress={() => {
+            theme.toggleTheme();
+          }}>
+          <ThemedIcon name={'search'} size={30} />
+        </TouchableOpacity>
+      )}
+    </ThemeContext.Consumer>
+  ) : (
+    <Layout />
+  );
 
   return (
     <View
@@ -104,14 +105,14 @@ export function PageHeader(props: {
         <TouchableShadow onPress={() => props.navigation.openDrawer()}>
           <Layout
             style={{
-            padding: 10,
-            borderRadius: 25,
-            width: 50,
-            height: 50,
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginLeft: 20,
-          }}>
+              padding: 10,
+              borderRadius: 25,
+              width: 50,
+              height: 50,
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginLeft: 20,
+            }}>
             <ThemedIcon name={'menu'} size={30} />
           </Layout>
         </TouchableShadow>
