@@ -1,103 +1,70 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {
-  View,
-  SafeAreaView,
-  StatusBar,
-  Platform,
-  ScrollView,
-  TouchableOpacity,
   Image,
-  FlatList,
+  SafeAreaView, ScrollView, View,
 } from 'react-native';
-import {HeaderSmall} from '../../components/Text/HeaderSmall';
 import {Header} from '../../components/Text/Header';
-//@ts-ignore
-import Confetti from 'react-native-confetti';
-//@ts-ignore
-import pvpTalk from '../../../assets/images/pvp_talk.png';
-import {SpecialEventCard} from '../../components/Card/SpecialEvent';
-import {NavigationInjectedProps} from 'react-navigation';
-import {EventCard} from '../../components/Card/Event';
-// @ts-ignore
-import anniversaryConfetti from '../../../assets/images/anniversary_confetti.png';
-// @ts-ignore
-import {Layout, Icon, withStyles, Text} from '@ui-kitten/components';
-import {ThemedIcon} from '../../components/Icon/ThemedIcon';
-import {ThemeContext} from '../../functions/theme';
-// @ts-ignore
-import gettingToSST from '../../../assets/images/getting_to_sst.png';
-import {CategoryCard} from '../../components/Card/Category';
-import {DetailCard} from '../../components/Card/Detail';
-import {TouchableShadow} from '../../components/Shadow/Touchable';
-
+import {NavigationInjectedProps, withNavigation} from 'react-navigation';
+import {Layout, Text} from '@ui-kitten/components';
 import {PageHeader} from '../../components/PageHeader';
-import {P} from '../../components/Text/P'
+//@ts-ignore
+import creditsImage from '../../../assets/images/credits.png'
 
-class HomePage extends React.Component<NavigationInjectedProps> {
-  static contextType = ThemeContext;
-  static navigationOptions = {
-    header: null,
-  };
-  private _confettiView: any;
-
-  componentDidMount(): void {
-    // Events.getCategories().then((res) => {
-    //   alert(JSON.stringify(res))
-    // })
-  }
-
+class CreditsPage extends React.Component<NavigationInjectedProps> {
   render() {
     return (
       <Layout
         style={{
           flex: 1,
         }}>
-        <ThemeContext.Consumer>
-          {theme => (
-            <StatusBar
-              barStyle={
-                theme.theme === 'light' ? 'dark-content' : 'light-content'
-              }
-            />
-          )}
-        </ThemeContext.Consumer>
         <SafeAreaView
           style={{
             flex: 1,
           }}>
-          <PageHeader
-            navigation={this.props.navigation}
-            title="Credits"
-            subtitle="The App"
-            searchTrue={false}
-          />
-          {/* Insert Image */}
-          <Layout style={{paddingVertical: 40, paddingHorizontal: 20}}>
-            <Header>SST Inc.</Header>
-            <P>
-              Qin Guan {'\n'}Yee Jia Chen {'\n'}Jonathan Tan Jiayi {'\n'}Shannen
-              Samuel Rajoo {'\n'}Ryan Theodore The {'\n'}
-            </P>
-            <Header>Images</Header>
-            <P>
-            https://icons8.com/ouch/ {'\n'}https://undraw.co/ {'\n'}
-            </P>
-            <Header>
-              Fonts
-            </Header>
-            <P>
-              IBM Plex Sans {'\n'}Raleway {'\n'}
-            </P>
-          </Layout>
+          <View style={{paddingHorizontal: 25, marginBottom: 10}}>
+            <PageHeader navigation={this.props.navigation} title="Credits" navOption={'menu'}/>
+          </View>
+          <View style={{
+            paddingLeft: 25,
+            paddingRight: 25,
+            flex: 1
+          }}>
+            <View style={{
+              backgroundColor: 'white',
+              borderRadius: 5,
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <Image source={creditsImage} style={{
+                width: '90%',
+                height: '90%',
+                resizeMode: 'contain'
+              }}>
+              </Image>
+            </View>
+            <View style={{marginTop: 15}}>
+              <Header variant={5}>SST Inc.</Header>
+              <Text category={'p1'}>
+                Qin Guan {'\n'}Yee Jia Chen {'\n'}Jonathan Tan Jiayi {'\n'}Shannen
+                Samuel Rajoo {'\n'}Ryan Theodore The {'\n'}
+              </Text>
+              <Header variant={5}>Images</Header>
+              <Text category={'p1'}>
+                https://icons8.com/ouch/ {'\n'}https://undraw.co/ {'\n'}
+              </Text>
+              <Header variant={5}>
+                Fonts
+              </Header>
+              <Text category={'p1'}>
+                IBM Plex Sans {'\n'}Raleway {'\n'}
+              </Text>
+            </View>
+          </View>
         </SafeAreaView>
-        <Confetti
-          ref={(node: any) => (this._confettiView = node)}
-          colors={['#E60233', '#0077C8', '#5F6A72']}
-          duration={3000}
-        />
       </Layout>
     );
   }
 }
 
-export default HomePage;
+export default CreditsPage;

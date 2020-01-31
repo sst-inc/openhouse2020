@@ -28,6 +28,7 @@ import {DetailCard} from "../../components/Card/Detail";
 import {TouchableShadow} from "../../components/Shadow/Touchable";
 
 import {PageHeader} from '../../components/PageHeader'
+
 class HomePage extends React.Component<NavigationInjectedProps> {
   static contextType = ThemeContext; //idk
   static navigationOptions = {
@@ -47,18 +48,25 @@ class HomePage extends React.Component<NavigationInjectedProps> {
         style={{
           flex: 1,
         }}>
-        <ThemeContext.Consumer>{theme =>
-          <StatusBar barStyle={theme.theme === 'light' ? 'dark-content' : 'light-content'}/>
-        }</ThemeContext.Consumer>
         <SafeAreaView
           style={{
             flex: 1,
           }}>
-          <PageHeader {...this.props} title="Events" subtitle="Discover" searchTrue={true} />
+          <View style={{paddingHorizontal: 25}}>
+            <PageHeader
+              headerRight={<TouchableOpacity
+                style={{marginRight: 15}}
+                onPress={() => {
+                  this.props.navigation.navigate("Search")
+                }}>
+                <ThemedIcon name={'search'} size={30}/>
+              </TouchableOpacity>} navigation={this.props.navigation} title="Events" subtitle="Discover"
+              navOption={'menu'}/>
+          </View>
           <ScrollView
             contentContainerStyle={{
               paddingBottom: 25,
-              paddingTop: 20
+              paddingTop: 10
             }}>
             <View style={{
               paddingLeft: 25,
@@ -165,12 +173,13 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                 }}>
                 Upcoming Events
               </Header>
-              {[1,1,1,1,1].map(() => {
+              {[1, 1, 1, 1, 1].map(() => {
                 return (
                   <View style={{
                     marginBottom: 15
                   }}>
-                    <DetailCard title='PVP Talk' duration={'10m'} likes={'10'} upNext={'1400'} onPress={() => {}}/>
+                    <DetailCard title='PVP Talk' duration={'10m'} likes={'10'} upNext={'1400'} onPress={() => {
+                    }}/>
                   </View>
                 )
               })}

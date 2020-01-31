@@ -52,7 +52,7 @@ const drawerData: { title: string; icon: any }[] = [
   },
   {
     title: "Credits",
-    icon: () => (<ThemedIcon name={'people-outline'} size={20} style={{marginRight: 15}}/>)
+    icon: () => (<ThemedIcon name={'info-outline'} size={20} style={{marginRight: 15}}/>)
   },
 ]
 
@@ -80,9 +80,6 @@ const AppNavigator = createStackNavigator({
   },
   Search: {
     screen: SearchPage
-  },
-  Credits: {
-    screen: CreditsPage
   },
   CategoryEvents: {
     screen: CategoryEventsPage

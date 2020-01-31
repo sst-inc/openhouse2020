@@ -14,7 +14,6 @@ export function Header(props: {children?: string, style?: TextStyle, variant?: n
           fontWeight: '700'
         }
       }),
-      fontSize: 25,
       ...props.style
     }}>
       {props.children}
