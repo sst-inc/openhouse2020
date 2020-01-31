@@ -143,7 +143,7 @@ class HomePage extends React.Component<NavigationInjectedProps> {
               return (
                 <CategoryCard title={item.title} icon={'facebook'}
                               onPress={() => {
-                                this.props.navigation.navigate("CategoryEvents")
+                                this.props.navigation.navigate("CategoryEvents", {selectedCategory: item.title})
                               }}/>
               )
             }}/>
