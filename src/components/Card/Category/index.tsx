@@ -10,6 +10,10 @@ export function CategoryCard(props: { title: string; icon: string; onPress(): vo
   return (
     <TouchableShadow style={{
       marginRight: 25,
+    }} onPress={() => {
+      if (props.onPress) {
+        props.onPress()
+      }
     }}>
       <Layout
         style={{
