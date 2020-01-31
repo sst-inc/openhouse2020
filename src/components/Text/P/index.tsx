@@ -2,19 +2,20 @@ import React from 'react'
 import {Text} from "@ui-kitten/components";
 import {TextStyle, Platform} from "react-native";
 
-export function Header(props: {children?: string, style?: TextStyle, variant?: number}) {
+export function P(props: any) {
   return (
-    <Text category={`h${props.variant || 1}`} style={{
+    <Text style={{
       ...Platform.select({
         android: {
-          fontFamily: 'Raleway 700'
+          fontFamily: 'IBM Plex Sans 400'
         },
         ios: {
-          fontFamily: 'Raleway',
-          fontWeight: '700'
+          fontFamily: 'IBM Plex Sans',
+          fontWeight: '400'
         }
       }),
-      fontSize: 25,
+      fontSize: 18,
+      lineHeight: 24,
       ...props.style
     }}>
       {props.children}

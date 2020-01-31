@@ -27,6 +27,7 @@ import {CategoryCard} from "../../components/Card/Category";
 import {DetailCard} from "../../components/Card/Detail";
 import {TouchableShadow} from "../../components/Shadow/Touchable";
 
+import {PageHeader} from '../../components/PageHeader'
 class HomePage extends React.Component<NavigationInjectedProps> {
   static contextType = ThemeContext;
   static navigationOptions = {
@@ -53,79 +54,7 @@ class HomePage extends React.Component<NavigationInjectedProps> {
           style={{
             flex: 1,
           }}>
-          <View
-            style={{
-              paddingTop: 10,
-              paddingLeft: 25,
-              paddingRight: 25,
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}>
-            <View>
-              <HeaderSmall
-                style={{
-                  ...Platform.select({
-                    ios: {
-                      fontFamily: 'Raleway',
-                    },
-                    android: {
-                      fontWeight: undefined,
-                      fontFamily: 'Raleway 700',
-                    },
-                  }),
-                }}>
-                D I S C O V E R
-              </HeaderSmall>
-              <Header
-                style={{
-                  ...Platform.select({
-                    ios: {
-                      fontWeight: '700',
-                      fontFamily: 'Raleway',
-                    },
-                    android: {
-                      fontWeight: undefined,
-                      fontFamily: 'Raleway 700',
-                    },
-                  }),
-                  marginTop: 5,
-                }}>
-                Events
-              </Header>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                flexDirection: 'row',
-              }}>
-              <ThemeContext.Consumer>
-                {theme => (
-                  <TouchableOpacity
-                    style={{marginRight: 15}}
-                    onPress={() => {
-                      theme.toggleTheme();
-                    }}>
-                    <ThemedIcon name={'search'} size={30}/>
-                  </TouchableOpacity>
-                )}
-              </ThemeContext.Consumer>
-              <TouchableShadow onPress={() => this.props.navigation.openDrawer()}>
-                <Layout style={{
-                  padding: 10,
-                  borderRadius: 25,
-                  width: 50,
-                  height: 50,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginLeft: 20
-                }}>
-                  <ThemedIcon name={'menu'} size={30}/>
-                </Layout>
-              </TouchableShadow>
-            </View>
-          </View>
+          <PageHeader {...this.props} title="Events" subtitle="Discover" searchTrue={true} />
           <ScrollView
             contentContainerStyle={{
               paddingBottom: 25,

@@ -65,31 +65,33 @@ export function PageHeader(props: {
       <View>
         <HeaderSmall
           style={{
+            textTransform: 'uppercase',
+            letterSpacing: 4,
             ...Platform.select({
+              android: {
+                fontFamily: 'Raleway 700'
+              },
               ios: {
                 fontFamily: 'Raleway',
-              },
-              android: {
-                fontWeight: undefined,
-                fontFamily: 'Raleway 700',
-              },
+                fontWeight: '700'
+              }
             }),
           }}>
           {props.subtitle}
         </HeaderSmall>
         <Header
           style={{
-            ...Platform.select({
-              ios: {
-                fontWeight: '700',
-                fontFamily: 'Raleway',
-              },
-              android: {
-                fontWeight: undefined,
-                fontFamily: 'Raleway 700',
-              },
-            }),
+            fontSize: 30,
             marginTop: 5,
+            ...Platform.select({
+              android: {
+                fontFamily: 'Raleway 700'
+              },
+              ios: {
+                fontFamily: 'Raleway',
+                fontWeight: '700'
+              }
+            }),
           }}>
           {props.title}
         </Header>
@@ -102,7 +104,7 @@ export function PageHeader(props: {
           flexDirection: 'row',
         }}>
         {searchBar}
-        <TouchableShadow onPress={() => props.navigation.openDrawer()}>
+        <TouchableShadow onPress={() => props.navigation.openDrawer()}> 
           <Layout
             style={{
               padding: 10,

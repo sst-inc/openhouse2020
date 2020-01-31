@@ -4,7 +4,10 @@ import {
   SafeAreaView,
   StatusBar,
   Platform,
-  ScrollView, TouchableOpacity, Image, FlatList,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  FlatList,
 } from 'react-native';
 import {HeaderSmall} from '../../components/Text/HeaderSmall';
 import {Header} from '../../components/Text/Header';
@@ -22,12 +25,13 @@ import {Layout, Icon, withStyles, Text} from '@ui-kitten/components';
 import {ThemedIcon} from '../../components/Icon/ThemedIcon';
 import {ThemeContext} from '../../functions/theme';
 // @ts-ignore
-import gettingToSST from '../../../assets/images/getting_to_sst.png'
-import {CategoryCard} from "../../components/Card/Category";
-import {DetailCard} from "../../components/Card/Detail";
-import {TouchableShadow} from "../../components/Shadow/Touchable";
+import gettingToSST from '../../../assets/images/getting_to_sst.png';
+import {CategoryCard} from '../../components/Card/Category';
+import {DetailCard} from '../../components/Card/Detail';
+import {TouchableShadow} from '../../components/Shadow/Touchable';
 
-import {PageHeader} from '../../components/PageHeader'
+import {PageHeader} from '../../components/PageHeader';
+import {P} from '../../components/Text/P'
 
 class HomePage extends React.Component<NavigationInjectedProps> {
   static contextType = ThemeContext;
@@ -48,15 +52,43 @@ class HomePage extends React.Component<NavigationInjectedProps> {
         style={{
           flex: 1,
         }}>
-        <ThemeContext.Consumer>{theme =>
-          <StatusBar barStyle={theme.theme === 'light' ? 'dark-content' : 'light-content'}/>
-        }</ThemeContext.Consumer>
+        <ThemeContext.Consumer>
+          {theme => (
+            <StatusBar
+              barStyle={
+                theme.theme === 'light' ? 'dark-content' : 'light-content'
+              }
+            />
+          )}
+        </ThemeContext.Consumer>
         <SafeAreaView
           style={{
             flex: 1,
           }}>
-          <PageHeader {...this.props} title="Credits" subtitle="T H E   A P P" searchTrue={false} />
-          
+          <PageHeader
+            {...this.props}
+            title="Credits"
+            subtitle="The App"
+            searchTrue={false}
+          />
+          {/* Insert Image */}
+          <Layout style={{paddingVertical: 40, paddingHorizontal: 20}}>
+            <Header style={{color: '#616485'}}>SST Inc.</Header>
+            <P style={{color: '#616485'}}>
+              Qin Guan {'\n'}Yee Jia Chen {'\n'}Jonathan Tan Jiayi {'\n'}Shannen
+              Samuel Rajoo {'\n'}Ryan Theodore The {'\n'}
+            </P>
+            <Header style={{color: '#616485'}}>Images</Header>
+            <P style={{color: '#616485'}}>
+            https://icons8.com/ouch/ {'\n'}https://undraw.co/ {'\n'}
+            </P>
+            <Header style={{color: '#616485'}}>
+              Fonts
+            </Header>
+            <P style={{color: '#616485'}}>
+              IBM Plex Sans {'\n'}Raleway {'\n'}
+            </P>
+          </Layout>
         </SafeAreaView>
         <Confetti
           ref={(node: any) => (this._confettiView = node)}
