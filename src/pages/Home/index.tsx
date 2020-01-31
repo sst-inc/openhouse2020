@@ -29,7 +29,7 @@ import {TouchableShadow} from "../../components/Shadow/Touchable";
 
 import {PageHeader} from '../../components/PageHeader'
 class HomePage extends React.Component<NavigationInjectedProps> {
-  static contextType = ThemeContext;
+  static contextType = ThemeContext; //idk
   static navigationOptions = {
     header: null,
   };
@@ -58,7 +58,7 @@ class HomePage extends React.Component<NavigationInjectedProps> {
           <ScrollView
             contentContainerStyle={{
               paddingBottom: 25,
-              paddingTop: 25
+              paddingTop: 20
             }}>
             <View style={{
               paddingLeft: 25,
@@ -143,6 +143,7 @@ class HomePage extends React.Component<NavigationInjectedProps> {
               return (
                 <CategoryCard title={item.title} icon={'facebook'}
                               onPress={() => {
+                                this.props.navigation.navigate("CategoryEvents")
                               }}/>
               )
             }}/>

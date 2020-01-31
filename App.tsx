@@ -25,6 +25,21 @@ import {Text} from "@ui-kitten/components";
 import customMapping from './assets/theme/custom-mapping.json'
 import {ThemeContext} from "./src/functions/theme";
 import {ThemedIcon} from "./src/components/Icon/ThemedIcon";
+import SearchPage from "./src/pages/Search";
+import CategoryEventsPage from "./src/pages/CategoryEvents";
+import analytics from '@react-native-firebase/analytics'
+
+//@ts-ignore
+function getActiveRouteName(navigationState) {
+  if (!navigationState) {
+    return null;
+  }
+  const route = navigationState.routes[navigationState.index];
+  if (route.routes) {
+    return getActiveRouteName(route);
+  }
+  return route.routeName;
+}
 
 const drawerData: { title: string; icon: any }[] = [
   {
@@ -37,7 +52,7 @@ const drawerData: { title: string; icon: any }[] = [
   },
   {
     title: "Credits",
-    icon: () => (<ThemedIcon name={'settings-2-outline'} size={20} style={{marginRight: 15}}/>)
+    icon: () => (<ThemedIcon name={'people-outline'} size={20} style={{marginRight: 15}}/>)
   },
 ]
 
@@ -63,7 +78,16 @@ const AppNavigator = createStackNavigator({
   Anniversary: {
     screen: AnniversaryPage
   },
-});
+  Search: {
+    screen: SearchPage
+  },
+  Credits: {
+    screen: CreditsPage
+  },
+  CategoryEvents: {
+    screen: CategoryEventsPage
+  }
+}, {});
 
 const DrawerNavigator = createDrawerNavigator({
   Home: {
@@ -160,7 +184,14 @@ class App extends React.Component<{}, AppState> {
           <ApplicationProvider mapping={mapping}
                                customMapping={customMapping}
                                theme={{...currentTheme, ...customTheme}}>
-            <AppContainer/>
+            <AppContainer onNavigationStateChange={(prevState, currentState) => {
+              const currentRouteName = getActiveRouteName(currentState);
+              const previousRouteName = getActiveRouteName(prevState);
+
+              if (previousRouteName !== currentRouteName) {
+                analytics().setCurrentScreen(currentRouteName, currentRouteName);
+              }
+            }}/>
           </ApplicationProvider>
         </ThemeContext.Provider>
       </PaperProvider>
