@@ -7,6 +7,7 @@ import {mapping, light, dark} from '@eva-design/eva';
 import {ApplicationProvider, IconRegistry, Drawer, Layout, Icon} from '@ui-kitten/components';
 import {Provider as PaperProvider} from 'react-native-paper';
 import HomePage from "./src/pages/Home";
+import CreditsPage from "./src/pages/Credits";
 import AppLoading from "./src/pages/AppLoading";
 import AnniversaryPage from "./src/pages/Anniversary";
 import {createDrawerNavigator} from "react-navigation-drawer";
@@ -48,7 +49,11 @@ const drawerData: { title: string; icon: any }[] = [
   {
     title: "Settings",
     icon: () => (<ThemedIcon name={'settings-2-outline'} size={20} style={{marginRight: 15}}/>)
-  }
+  },
+  {
+    title: "Credits",
+    icon: () => (<ThemedIcon name={'info-outline'} size={20} style={{marginRight: 15}}/>)
+  },
 ]
 
 const DrawerComponent = ({navigation}: any) => {
@@ -87,7 +92,10 @@ const DrawerNavigator = createDrawerNavigator({
   },
   Settings: {
     screen: SettingsPage
-  }
+  },
+  Credits: {
+    screen: CreditsPage
+  },
 }, {
   drawerPosition: 'right',
   contentComponent: DrawerComponent

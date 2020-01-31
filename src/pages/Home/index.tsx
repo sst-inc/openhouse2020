@@ -27,7 +27,10 @@ import {CategoryCard} from "../../components/Card/Category";
 import {DetailCard} from "../../components/Card/Detail";
 import {TouchableShadow} from "../../components/Shadow/Touchable";
 
+import {PageHeader} from '../../components/PageHeader'
+
 class HomePage extends React.Component<NavigationInjectedProps> {
+  static contextType = ThemeContext; //idk
   static navigationOptions = {
     header: null,
   };
@@ -45,90 +48,25 @@ class HomePage extends React.Component<NavigationInjectedProps> {
         style={{
           flex: 1,
         }}>
-        <ThemeContext.Consumer>{theme =>
-          <StatusBar barStyle={theme.theme === 'light' ? 'dark-content' : 'light-content'}/>
-        }</ThemeContext.Consumer>
         <SafeAreaView
           style={{
             flex: 1,
           }}>
-          <View
-            style={{
-              paddingTop: 10,
-              paddingLeft: 25,
-              paddingRight: 25,
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}>
-            <View>
-              <HeaderSmall
-                style={{
-                  ...Platform.select({
-                    ios: {
-                      fontFamily: 'Raleway',
-                    },
-                    android: {
-                      fontWeight: undefined,
-                      fontFamily: 'Raleway 700',
-                    },
-                  }),
+          <View style={{paddingHorizontal: 25}}>
+            <PageHeader
+              headerRight={<TouchableOpacity
+                style={{marginRight: 15}}
+                onPress={() => {
+                  this.props.navigation.navigate("Search")
                 }}>
-                D I S C O V E R
-              </HeaderSmall>
-              <Header
-                style={{
-                  ...Platform.select({
-                    ios: {
-                      fontWeight: '700',
-                      fontFamily: 'Raleway',
-                    },
-                    android: {
-                      fontWeight: undefined,
-                      fontFamily: 'Raleway 700',
-                    },
-                  }),
-                  marginTop: 5,
-                }}>
-                Events
-              </Header>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                flexDirection: 'row',
-              }}>
-              <ThemeContext.Consumer>
-                {theme => (
-                  <TouchableOpacity
-                    style={{marginRight: 15}}
-                    onPress={() => {
-                      this.props.navigation.navigate("Search")
-                    }}>
-                    <ThemedIcon name={'search'} size={30}/>
-                  </TouchableOpacity>
-                )}
-              </ThemeContext.Consumer>
-              <TouchableShadow onPress={() => this.props.navigation.openDrawer()}>
-                <Layout style={{
-                  padding: 10,
-                  borderRadius: 25,
-                  width: 50,
-                  height: 50,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginLeft: 20
-                }}>
-                  <ThemedIcon name={'menu'} size={30}/>
-                </Layout>
-              </TouchableShadow>
-            </View>
+                <ThemedIcon name={'search'} size={30}/>
+              </TouchableOpacity>} navigation={this.props.navigation} title="Events" subtitle="Discover"
+              navOption={'menu'}/>
           </View>
           <ScrollView
             contentContainerStyle={{
               paddingBottom: 25,
-              paddingTop: 20
+              paddingTop: 10
             }}>
             <View style={{
               paddingLeft: 25,
@@ -235,12 +173,13 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                 }}>
                 Upcoming Events
               </Header>
-              {[1,1,1,1,1].map(() => {
+              {[1, 1, 1, 1, 1].map(() => {
                 return (
                   <View style={{
                     marginBottom: 15
                   }}>
-                    <DetailCard title='PVP Talk' duration={'10m'} likes={'10'} upNext={'1400'} onPress={() => {}}/>
+                    <DetailCard title='PVP Talk' duration={'10m'} likes={'10'} upNext={'1400'} onPress={() => {
+                    }}/>
                   </View>
                 )
               })}

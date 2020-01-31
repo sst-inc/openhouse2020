@@ -6,6 +6,7 @@ import {ThemeContext} from "../../functions/theme";
 import {Header} from "../../components/Text/Header";
 import {ThemedIcon} from "../../components/Icon/ThemedIcon";
 import {NavigationInjectedProps} from "react-navigation";
+import PageHeader from "../../components/PageHeader";
 
 interface CategoryEventsPageState {
   selectedCategory: string;
@@ -41,60 +42,10 @@ class CategoryEventsPage extends Component<NavigationInjectedProps, CategoryEven
           style={{
             flex: 1,
           }}>
-          <View
-            style={{
-              paddingTop: 10,
-              paddingLeft: 25,
-              paddingRight: 25,
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}>
-            <View>
-              <HeaderSmall
-                style={{
-                  ...Platform.select({
-                    ios: {
-                      fontFamily: 'Raleway',
-                    },
-                    android: {
-                      fontWeight: undefined,
-                      fontFamily: 'Raleway 700',
-                    },
-                  }),
-                }}>
-                C A T E G O R I E S
-              </HeaderSmall>
-              <Header
-                style={{
-                  ...Platform.select({
-                    ios: {
-                      fontWeight: '700',
-                      fontFamily: 'Raleway',
-                    },
-                    android: {
-                      fontWeight: undefined,
-                      fontFamily: 'Raleway 700',
-                    },
-                  }),
-                  marginTop: 5,
-                }}>
-                {this.state.selectedCategory}
-              </Header>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                flexDirection: 'row',
-              }}>
-              <TouchableOpacity
-                onPress={() => {
-                  this.props.navigation.goBack()
-                }}>
-                <ThemedIcon name={'close'} size={30}/>
-              </TouchableOpacity>
-            </View>
+          <View style={{
+            paddingHorizontal: 25
+          }}>
+            <PageHeader subtitle={'categories'} navOption={'back'} title={this.props.navigation.getParam("selectedCategory")} navigation={this.props.navigation}/>
           </View>
         </SafeAreaView>
       </Layout>
