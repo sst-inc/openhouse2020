@@ -1,85 +1,61 @@
 // @Ryan
 
-import React, {useContext} from 'react';
+import React, {ReactNode} from 'react';
 import {
   View,
-  SafeAreaView,
-  StatusBar,
   Platform,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  FlatList,
+  Text, StatusBar,
 } from 'react-native';
 import {HeaderSmall} from '../../components/Text/HeaderSmall';
 import {Header} from '../../components/Text/Header';
-//@ts-ignore
-import Confetti from 'react-native-confetti';
-//@ts-ignore
-import pvpTalk from '../../../assets/images/pvp_talk.png';
-import {SpecialEventCard} from '../../components/Card/SpecialEvent';
-import {NavigationInjectedProps} from 'react-navigation';
-import {EventCard} from '../../components/Card/Event';
-// @ts-ignore
-import anniversaryConfetti from '../../../assets/images/anniversary_confetti.png';
-// @ts-ignore
-import {Layout, Icon, withStyles, Text} from '@ui-kitten/components';
+import {Layout} from '@ui-kitten/components';
 import {ThemedIcon} from '../../components/Icon/ThemedIcon';
-import {ThemeContext} from '../../functions/theme';
-// @ts-ignore
-import gettingToSST from '../../../assets/images/getting_to_sst.png';
-import {CategoryCard} from '../../components/Card/Category';
-import {DetailCard} from '../../components/Card/Detail';
+import {withNavigation} from 'react-navigation'
 import {TouchableShadow} from '../../components/Shadow/Touchable';
+import {NavigationInjectedProps} from "react-navigation";
+import {ThemeContext} from "../../functions/theme";
 
-export function PageHeader(props: {
-  navigation: any;
+interface PageHeaderProps {
+  navOption: 'menu' | 'back';
   title: string;
-  subtitle: string;
-  searchTrue: boolean;
-}) {
-  const searchBar = props.searchTrue ? (
-    <ThemeContext.Consumer>
-      {theme => (
-        <TouchableOpacity
-          style={{marginRight: 15}}
-          onPress={() => {
-            theme.toggleTheme();
-          }}>
-          <ThemedIcon name={'search'} size={30} />
-        </TouchableOpacity>
-      )}
-    </ThemeContext.Consumer>
-  ) : (
-    <Layout />
-  );
+  subtitle?: string;
+  headerRight?: ReactNode;
+}
 
+type Props = PageHeaderProps & NavigationInjectedProps
+
+export function PageHeader(props: Props) {
+  const isMenu = props.navOption === 'menu'
   return (
     <View
       style={{
-        paddingTop: 10,
-        paddingLeft: 25,
-        paddingRight: 25,
         flexDirection: 'row',
         alignItems: 'center',
+        marginTop: 15,
+        marginBottom: 5
       }}>
+      <ThemeContext.Consumer>{theme =>
+        <StatusBar barStyle={theme.theme === 'light' ? 'dark-content' : 'light-content'}/>
+      }</ThemeContext.Consumer>
       <View>
-        <HeaderSmall
-          style={{
-            textTransform: 'uppercase',
-            letterSpacing: 4,
-            ...Platform.select({
-              android: {
-                fontFamily: 'Raleway 700'
-              },
-              ios: {
-                fontFamily: 'Raleway',
-                fontWeight: '700'
-              }
-            }),
-          }}>
-          {props.subtitle}
-        </HeaderSmall>
+        {props.subtitle ? (
+          <HeaderSmall
+            style={{
+              textTransform: 'uppercase',
+              letterSpacing: 4,
+              ...Platform.select({
+                android: {
+                  fontFamily: 'Raleway 700'
+                },
+                ios: {
+                  fontFamily: 'Raleway',
+                  fontWeight: '700'
+                }
+              }),
+            }}>
+            {props.subtitle}
+          </HeaderSmall>
+        ) : null}
         <Header
           style={{
             fontSize: 30,
@@ -103,8 +79,8 @@ export function PageHeader(props: {
           justifyContent: 'flex-end',
           flexDirection: 'row',
         }}>
-        {searchBar}
-        <TouchableShadow onPress={() => props.navigation.openDrawer()}> 
+        {props.headerRight || null}
+        <TouchableShadow onPress={() => isMenu ? props.navigation.openDrawer() : props.navigation.goBack()}>
           <Layout
             style={{
               padding: 10,
@@ -115,7 +91,7 @@ export function PageHeader(props: {
               justifyContent: 'center',
               marginLeft: 20,
             }}>
-            <ThemedIcon name={'menu'} size={30} />
+            <ThemedIcon name={isMenu ? "menu" : "close"} size={30} />
           </Layout>
         </TouchableShadow>
       </View>
@@ -123,4 +99,4 @@ export function PageHeader(props: {
   );
 }
 
-export default PageHeader;
+export default PageHeader
