@@ -1,8 +1,8 @@
 // @Ryan
-
 import React from 'react';
 import {View, Platform} from 'react-native';
 import {Layout, Text} from '@ui-kitten/components';
+
 import {TouchableShadow} from "../../Shadow/Touchable";
 import {Timing} from '../../Text/Timing'
 

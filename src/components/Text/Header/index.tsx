@@ -1,6 +1,6 @@
 import React from 'react'
-import {Text} from "@ui-kitten/components";
 import {TextStyle, Platform} from "react-native";
+import {Text} from "@ui-kitten/components";
 
 export function Header(props: {children?: string, style?: TextStyle, variant?: number}) {
   return (

@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, TouchableOpacity, Platform} from 'react-native'
+import {Platform} from 'react-native'
 import {Text, Layout} from "@ui-kitten/components";
+
 import {TouchableShadow} from "../../Shadow/Touchable";
 
 export function PrimaryButton(props: {title: string, onPress?(): void}) {

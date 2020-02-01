@@ -1,5 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, ViewStyle} from "react-native";
+
 import {ThemeContext} from "../../../functions/theme";
 
 export function TouchableShadow(props: {intensity?: number; children?: React.ReactNode; style?: ViewStyle; onPress?(): void}) {
