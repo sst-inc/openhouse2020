@@ -31,7 +31,6 @@ import {DetailCard} from '../../components/Card/Detail';
 import {TouchableShadow} from '../../components/Shadow/Touchable';
 
 import {PageHeader} from '../../components/PageHeader';
-import {P} from '../../components/Text/P'
 
 class HomePage extends React.Component<NavigationInjectedProps> {
   static contextType = ThemeContext;
@@ -74,20 +73,20 @@ class HomePage extends React.Component<NavigationInjectedProps> {
           {/* Insert Image */}
           <Layout style={{paddingVertical: 40, paddingHorizontal: 20}}>
             <Header>SST Inc.</Header>
-            <P>
+            <Text>
               Qin Guan {'\n'}Yee Jia Chen {'\n'}Jonathan Tan Jiayi {'\n'}Shannen
               Samuel Rajoo {'\n'}Ryan Theodore The {'\n'}
-            </P>
+            </Text>
             <Header>Images</Header>
-            <P>
+            <Text>
             https://icons8.com/ouch/ {'\n'}https://undraw.co/ {'\n'}
-            </P>
+            </Text>
             <Header>
               Fonts
             </Header>
-            <P>
+            <Text>
               IBM Plex Sans {'\n'}Raleway {'\n'}
-            </P>
+            </Text>
           </Layout>
         </SafeAreaView>
         <Confetti
