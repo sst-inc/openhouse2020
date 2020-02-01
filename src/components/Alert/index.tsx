@@ -1,5 +1,5 @@
-import {Paragraph, Dialog, Portal} from 'react-native-paper';
 import React, {ReactNode} from "react";
+import {Paragraph, Dialog, Portal} from 'react-native-paper';
 
 export default function Alert(props: { visible: boolean; onDismiss(): void, title?: string; content?: string; dialogActions: ReactNode }) {
     return (

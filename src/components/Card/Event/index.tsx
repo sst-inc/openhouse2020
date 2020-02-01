@@ -1,6 +1,7 @@
 import React, {ReactNode} from 'react';
 import {ImageBackground, ImageURISource, Platform, TouchableOpacity, View, ViewStyle} from "react-native";
 import {Layout, Text} from "@ui-kitten/components";
+
 import {TouchableShadow} from "../../Shadow/Touchable";
 
 export function EventCard(props: { title?: string, image?: ImageURISource, onPress(): void; children?: ReactNode; style?: ViewStyle }) {

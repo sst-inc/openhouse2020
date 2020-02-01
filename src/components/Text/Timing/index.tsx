@@ -1,5 +1,4 @@
 // @Ryan
-
 import React from 'react';
 import {View, Platform, ViewStyle, TextStyle} from 'react-native';
 import {Text} from '@ui-kitten/components';

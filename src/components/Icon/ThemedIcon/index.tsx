@@ -1,7 +1,8 @@
-import {Icon, withStyles, Text} from "@ui-kitten/components";
-import {processTheme, ThemeContext} from "../../../functions/theme";
 import React from "react";
 import {ViewStyle} from "react-native";
+import {Icon, withStyles, Text} from "@ui-kitten/components";
+
+import {processTheme, ThemeContext} from "../../../functions/theme";
 
 function TI(props: { name: string; size: number; themedStyle?: any; style?: ViewStyle}) {
   return (

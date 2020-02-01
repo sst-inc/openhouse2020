@@ -1,8 +1,8 @@
 // @Ryan
-
 import React from 'react';
 import {ImageURISource, View, TouchableOpacity, Platform} from 'react-native';
 import {Layout, Text, Icon} from '@ui-kitten/components';
+
 import {ThemedIcon} from "../../Icon/ThemedIcon";
 import {TouchableShadow} from "../../Shadow/Touchable";
 

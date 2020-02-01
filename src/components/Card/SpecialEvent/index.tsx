@@ -1,10 +1,10 @@
 import React from 'react';
-import LinearGradient from "react-native-linear-gradient";
 import {Image, Platform, View} from "react-native";
-import {Text} from "@ui-kitten/components";
+import {Text, withStyles} from "@ui-kitten/components";
+import LinearGradient from "react-native-linear-gradient";
+
 import {Subtitle} from "../../Text/Subtitle";
 import {PrimaryButton} from "../../Button/Primary";
-import {withStyles} from '@ui-kitten/components';
 import {processTheme, ThemeContext} from "../../../functions/theme";
 import {ViewShadow} from "../../Shadow/View";
 

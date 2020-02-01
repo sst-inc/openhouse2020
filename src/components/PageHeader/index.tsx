@@ -1,18 +1,16 @@
 // @Ryan
-
 import React, {ReactNode} from 'react';
 import {
   View,
-  Platform,
-  Text, StatusBar,
+  Platform, StatusBar
 } from 'react-native';
+import {Layout} from '@ui-kitten/components';
+import {NavigationInjectedProps} from "react-navigation";
+
 import {HeaderSmall} from '../../components/Text/HeaderSmall';
 import {Header} from '../../components/Text/Header';
-import {Layout} from '@ui-kitten/components';
 import {ThemedIcon} from '../../components/Icon/ThemedIcon';
-import {withNavigation} from 'react-navigation'
 import {TouchableShadow} from '../../components/Shadow/Touchable';
-import {NavigationInjectedProps} from "react-navigation";
 import {ThemeContext} from "../../functions/theme";
 
 interface PageHeaderProps {

@@ -1,11 +1,12 @@
 import React from 'react';
 import {
   Image,
-  SafeAreaView, ScrollView, View,
+  SafeAreaView, View,
 } from 'react-native';
-import {Header} from '../../components/Text/Header';
-import {NavigationInjectedProps, withNavigation} from 'react-navigation';
 import {Layout, Text} from '@ui-kitten/components';
+import {NavigationInjectedProps} from 'react-navigation';
+
+import {Header} from '../../components/Text/Header';
 import {PageHeader} from '../../components/PageHeader';
 //@ts-ignore
 import creditsImage from '../../../assets/images/credits.png'
