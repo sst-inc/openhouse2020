@@ -45,15 +45,6 @@ class RedemptionPage extends React.Component<NavigationInjectedProps> {
           }}>
           <View style={{paddingHorizontal: 25}}>
             <PageHeader
-              headerRight={
-                <TouchableOpacity
-                  style={{marginRight: 15}}
-                  onPress={() => {
-                    this.props.navigation.navigate('Search');
-                  }}>
-                  <ThemedIcon name={'search'} size={30} />
-                </TouchableOpacity>
-              }
               navigation={this.props.navigation}
               title="Redemption"
               subtitle="Gifts"
