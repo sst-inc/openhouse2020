@@ -8,6 +8,7 @@ import {ApplicationProvider, IconRegistry, Drawer, Layout, Icon} from '@ui-kitte
 import {Provider as PaperProvider} from 'react-native-paper';
 import HomePage from "./src/pages/Home";
 import CreditsPage from "./src/pages/Credits";
+import RedemptionPage from "./src/pages/Redemption";
 import AppLoading from "./src/pages/AppLoading";
 import AnniversaryPage from "./src/pages/Anniversary";
 import {createDrawerNavigator} from "react-navigation-drawer";
@@ -47,6 +48,10 @@ const drawerData: { title: string; icon: any }[] = [
     icon: () => (<ThemedIcon name={'home-outline'} size={20} style={{marginRight: 15}}/>)
   },
   {
+    title: "Redemption",
+    icon: () => (<ThemedIcon name={'gift-outline'} size={20} style={{marginRight: 15}}/>)
+  },
+  {
     title: "Settings",
     icon: () => (<ThemedIcon name={'settings-2-outline'} size={20} style={{marginRight: 15}}/>)
   },
@@ -83,7 +88,7 @@ const AppNavigator = createStackNavigator({
   },
   CategoryEvents: {
     screen: CategoryEventsPage
-  }
+  },
 }, {});
 
 const DrawerNavigator = createDrawerNavigator({
@@ -95,6 +100,9 @@ const DrawerNavigator = createDrawerNavigator({
   },
   Credits: {
     screen: CreditsPage
+  },
+  Redemption: {
+    screen: RedemptionPage
   },
 }, {
   drawerPosition: 'right',
@@ -185,9 +193,9 @@ class App extends React.Component<{}, AppState> {
               const currentRouteName = getActiveRouteName(currentState);
               const previousRouteName = getActiveRouteName(prevState);
 
-              if (previousRouteName !== currentRouteName) {
-                analytics().setCurrentScreen(currentRouteName, currentRouteName);
-              }
+              // if (previousRouteName !== currentRouteName) {
+              //   analytics().setCurrentScreen(currentRouteName, currentRouteName);
+              // }
             }}/>
           </ApplicationProvider>
         </ThemeContext.Provider>
