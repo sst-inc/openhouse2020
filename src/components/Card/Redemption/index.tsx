@@ -15,6 +15,7 @@ export const RedemptionCard = (props: {
   return (
     <ViewShadow>
       <Layout
+        level={'2'}
         style={{
           width: '100%',
           paddingVertical: 10,

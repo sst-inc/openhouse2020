@@ -7,7 +7,9 @@ import firestore from "@react-native-firebase/firestore";
 
 export function registerUserFirebase(user: FirebaseUser, id: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-        firestore().collection("users").doc(id).set({email: user.email, name: user.name}).then(() => {
+        const emailArr = user.email.split("@")
+        const isStudent = emailArr[emailArr.length - 1].includes("sst.edu.sg") || emailArr[emailArr.length - 1].includes("ssts.edu.sg")
+        firestore().collection("users").doc(id).set({email: user.email, name: user.name, access: isStudent ? 2 : 1}).then(() => {
             resolve()
         }).catch(() => {
             reject()

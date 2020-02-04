@@ -11,6 +11,7 @@ import {RedemptionCard} from '../../components/Card/Redemption';
 import QRCode from 'react-native-qrcode-svg';
 //@ts-ignore
 import redemption from '../../../assets/images/redemption.png'
+import {ThemeContext} from "../../functions/theme";
 
 //TODO - admin for sls
 
@@ -45,13 +46,17 @@ class RedemptionPage extends React.Component<NavigationInjectedProps> {
                 alignItems: 'center',
                 marginVertical: 25
               }}>
-                <QRCode
-                  value={'someuserID'}
-                  size={Dimensions.get("window").height/5}
-                  // logo={sst}
-                  // logoBackgroundColor={'white'}
-                  // logoSize={100}
-                />
+                <ThemeContext.Consumer>{theme =>
+                  <QRCode
+                    value={'someuserID'}
+                    size={Dimensions.get("window").height/5}
+                    backgroundColor={'transparent'}
+                    color={theme.theme === 'light' ? 'black' : 'white'}
+                    // logo={sst}
+                    // logoBackgroundColor={'white'}
+                    // logoSize={100}
+                  />
+                }</ThemeContext.Consumer>
                 <Text appearance={'hint'} style={{marginTop: 10}}>
                   {"someuserID"}
                 </Text>
