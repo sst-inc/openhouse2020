@@ -12,6 +12,8 @@ import QRCode from 'react-native-qrcode-svg';
 //@ts-ignore
 import redemption from '../../../assets/images/redemption.png'
 
+//TODO - admin for sls
+
 class RedemptionPage extends React.Component<NavigationInjectedProps> {
   render() {
     return (
