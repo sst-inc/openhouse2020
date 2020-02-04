@@ -175,6 +175,7 @@ class HomePage extends React.Component<NavigationInjectedProps> {
                     marginBottom: 15
                   }}>
                     <DetailCard title='PVP Talk' duration={'10m'} likes={'10'} upNext={'1400'} onPress={() => {
+                      this.props.navigation.navigate("EventDetails")
                     }}/>
                   </View>
                 )

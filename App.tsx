@@ -29,6 +29,7 @@ import {ThemedIcon} from "./src/components/Icon/ThemedIcon";
 import SearchPage from "./src/pages/Search";
 import CategoryEventsPage from "./src/pages/CategoryEvents";
 import analytics from '@react-native-firebase/analytics'
+import EventDetailsPage from "./src/pages/EventDetails";
 
 //@ts-ignore
 function getActiveRouteName(navigationState) {
@@ -89,6 +90,9 @@ const AppNavigator = createStackNavigator({
   CategoryEvents: {
     screen: CategoryEventsPage
   },
+  EventDetails: {
+    screen: EventDetailsPage
+  }
 }, {});
 
 const DrawerNavigator = createDrawerNavigator({
