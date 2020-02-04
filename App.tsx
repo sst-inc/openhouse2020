@@ -30,6 +30,7 @@ import SearchPage from "./src/pages/Search";
 import CategoryEventsPage from "./src/pages/CategoryEvents";
 import analytics from '@react-native-firebase/analytics'
 import EventDetailsPage from "./src/pages/EventDetails";
+import TravelPage from "./src/pages/Travel";
 
 //@ts-ignore
 function getActiveRouteName(navigationState) {
@@ -92,6 +93,9 @@ const AppNavigator = createStackNavigator({
   },
   EventDetails: {
     screen: EventDetailsPage
+  },
+  Travel: {
+    screen: TravelPage
   }
 }, {});
 

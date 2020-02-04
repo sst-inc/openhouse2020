@@ -77,7 +77,7 @@ class HomePage extends React.Component<NavigationInjectedProps> {
               <ThemeContext.Consumer>
                 {theme => <EventCard
                   onPress={() => {
-                    this.props.navigation.navigate("Anniversary")
+                    this.props.navigation.navigate("Travel")
                   }}
                 >
                   <View style={{
