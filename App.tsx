@@ -193,9 +193,9 @@ class App extends React.Component<{}, AppState> {
               const currentRouteName = getActiveRouteName(currentState);
               const previousRouteName = getActiveRouteName(prevState);
 
-              // if (previousRouteName !== currentRouteName) {
-              //   analytics().setCurrentScreen(currentRouteName, currentRouteName);
-              // }
+              if (previousRouteName !== currentRouteName) {
+                analytics().setCurrentScreen(currentRouteName, currentRouteName);
+              }
             }}/>
           </ApplicationProvider>
         </ThemeContext.Provider>

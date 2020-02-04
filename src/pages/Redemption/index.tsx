@@ -2,37 +2,17 @@ import React from 'react';
 import {
   View,
   SafeAreaView,
-  StatusBar,
-  Platform,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  FlatList,
+  Platform, ScrollView, TouchableOpacity, Image, Dimensions,
 } from 'react-native';
-import {HeaderSmall} from '../../components/Text/HeaderSmall';
-import {Header} from '../../components/Text/Header';
-//@ts-ignore
-import Confetti from 'react-native-confetti';
 import {NavigationInjectedProps} from 'react-navigation';
-import {Layout, Icon, withStyles, Text} from '@ui-kitten/components';
-import {ThemedIcon} from '../../components/Icon/ThemedIcon';
-import {ThemeContext} from '../../functions/theme';
+import {Layout, Text} from '@ui-kitten/components';
 import {PageHeader} from '../../components/PageHeader';
 import {RedemptionCard} from '../../components/Card/Redemption';
+import QRCode from 'react-native-qrcode-svg';
+//@ts-ignore
+import redemption from '../../../assets/images/redemption.png'
 
 class RedemptionPage extends React.Component<NavigationInjectedProps> {
-  static contextType = ThemeContext; //idk
-  static navigationOptions = {
-    header: null,
-  };
-  private _confettiView: any;
-
-  componentDidMount(): void {
-    // Events.getCategories().then((res) => {
-    //   alert(JSON.stringify(res))
-    // })
-  }
-
   render() {
     return (
       <Layout
@@ -51,40 +31,73 @@ class RedemptionPage extends React.Component<NavigationInjectedProps> {
               navOption={'menu'}
             />
           </View>
-          <Layout
+          <View
             style={{
               paddingBottom: 25,
               paddingTop: 10,
               paddingHorizontal: 20,
+              flex: 1
             }}>
-            <RedemptionCard title="17" subtitle="Points" color="#BF2C2C" />
-            <Layout
-              style={{
-                flexDirection: 'row',
+            <View style={{flex: 3, justifyContent: 'center'}}>
+              <View style={{
+                alignItems: 'center',
+                marginVertical: 25
               }}>
-              <Layout style={{width: '50%', flex: 1, marginRight: 5}}>
-                <RedemptionCard title="5th" subtitle="Prize Tier" color="#0077C8"/>
-              </Layout>
-              <Layout style={{width: '50%', flex: 1, marginLeft: 5}}>
-                <RedemptionCard title="7" subtitle="Points to Next Tier!" color="#0077C8"/>
-              </Layout>
-            </Layout>
-            <Text style={{
-              textAlign: 'center',
-              color: '#BF2C2C',
-              ...Platform.select({
-                android: {
-                  fontFamily: 'Raleway 600',
-                },
-                ios: {
-                  fontFamily: 'Raleway',
-                  fontWeight: '600',
-                },
-              }),
-              paddingVertical: 15,
-              }}>Need Help? dont Click here!</Text>
-
-          </Layout>
+                <QRCode
+                  value={'someuserID'}
+                  size={Dimensions.get("window").height/5}
+                  // logo={sst}
+                  // logoBackgroundColor={'white'}
+                  // logoSize={100}
+                />
+                <Text appearance={'hint'} style={{marginTop: 10}}>
+                  {"someuserID"}
+                </Text>
+              </View>
+              <RedemptionCard title="17" subtitle="Points" status="danger" subtitleStyle={{opacity: 0.5}}/>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginTop: 15
+                }}>
+                <Layout style={{flex: 1, marginRight: 5}}>
+                  <RedemptionCard title="5th" subtitle="Prize Tier" status={'primary'} subtitleStyle={{opacity: 0.5}}/>
+                </Layout>
+                <Layout style={{flex: 1, marginLeft: 5}}>
+                  <RedemptionCard title="7" subtitle="Points to Next Tier!" status={'primary'}
+                                  subtitleStyle={{opacity: 0.5}}/>
+                </Layout>
+              </View>
+              <TouchableOpacity style={{
+                alignSelf: 'center',
+                paddingVertical: 20
+              }}>
+                <Text style={{
+                  ...Platform.select({
+                    android: {
+                      fontFamily: 'Raleway 600',
+                    },
+                    ios: {
+                      fontFamily: 'Raleway',
+                      fontWeight: '600',
+                    },
+                  }),
+                  opacity: 0.5,
+                }} status={'danger'}>
+                  Need Help? Click here!
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{flex: 1}}>
+              <View style={{flex: 1}}>
+                <Image source={redemption} style={{
+                  resizeMode: 'contain',
+                  width: '100%',
+                  height: '100%',
+                }}/>
+              </View>
+            </View>
+          </View>
         </SafeAreaView>
       </Layout>
     );

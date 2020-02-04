@@ -9,8 +9,6 @@ import {
 import {HeaderSmall} from '../../components/Text/HeaderSmall';
 import {Header} from '../../components/Text/Header';
 //@ts-ignore
-import Confetti from 'react-native-confetti';
-//@ts-ignore
 import pvpTalk from '../../../assets/images/pvp_talk.png';
 import {SpecialEventCard} from '../../components/Card/SpecialEvent';
 import {NavigationInjectedProps} from 'react-navigation';
@@ -30,11 +28,9 @@ import {TouchableShadow} from "../../components/Shadow/Touchable";
 import {PageHeader} from '../../components/PageHeader'
 
 class HomePage extends React.Component<NavigationInjectedProps> {
-  static contextType = ThemeContext; //idk
   static navigationOptions = {
     header: null,
   };
-  private _confettiView: any;
 
   componentDidMount(): void {
     // Events.getCategories().then((res) => {
@@ -186,11 +182,6 @@ class HomePage extends React.Component<NavigationInjectedProps> {
             </Layout>
           </ScrollView>
         </SafeAreaView>
-        <Confetti
-          ref={(node: any) => (this._confettiView = node)}
-          colors={['#E60233', '#0077C8', '#5F6A72']}
-          duration={3000}
-        />
       </Layout>
     );
   }

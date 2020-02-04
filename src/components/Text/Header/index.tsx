@@ -6,9 +6,11 @@ export function Header(props: {
   children?: string;
   style?: TextStyle;
   variant?: number;
+  status?: string;
 }) {
   return (
     <Text
+      status={props.status}
       category={`h${props.variant || 1}`}
       style={{
         ...Platform.select({
