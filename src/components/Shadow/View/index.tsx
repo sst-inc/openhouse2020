@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, ViewStyle} from "react-native";
+import {ViewStyle, View} from "react-native";
 
 import {ThemeContext} from "../../../functions/theme";
 
@@ -7,7 +7,7 @@ export function ViewShadow(props: {intensity?: number; children?: React.ReactNod
   return (
     <ThemeContext.Consumer>
       {theme =>
-        <TouchableOpacity style={{
+        <View style={{
           elevation: (props.intensity || 2) * 5,
           shadowColor: theme.theme === 'light' ? "gray" : 'black',
           shadowOffset: {width: 0, height: 0},
@@ -16,7 +16,7 @@ export function ViewShadow(props: {intensity?: number; children?: React.ReactNod
           ...props.style
         }}>
           {props.children}
-        </TouchableOpacity>}
+        </View>}
     </ThemeContext.Consumer>
   )
 }
