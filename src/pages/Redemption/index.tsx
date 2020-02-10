@@ -49,7 +49,7 @@ class RedemptionPage extends React.Component<NavigationInjectedProps> {
                 <ThemeContext.Consumer>{theme =>
                   <QRCode
                     value={'someuserID'}
-                    size={Dimensions.get("window").height/5}
+                    size={Dimensions.get("window").height/4}
                     backgroundColor={'transparent'}
                     color={theme.theme === 'light' ? 'black' : 'white'}
                     // logo={sst}
