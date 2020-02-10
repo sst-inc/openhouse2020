@@ -35,7 +35,7 @@ class CreditsPage extends React.Component<NavigationInjectedProps> {
               borderRadius: 5,
               flex: 1,
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
             }}>
               <Image source={creditsImage} style={{
                 width: '90%',
