@@ -3,14 +3,16 @@ import { Platform } from 'react-native'
 import { Layout, Text } from '@ui-kitten/components'
 
 
-export const TransportNumberCard = (props: {color?: string}) => {
+export const TransportNumberCard = (props: {color?: string, width?: number, number: string}) => {
   return (
     <Layout style={{
       backgroundColor: props.color ?? "#64C361",
-      width: 50,
+      width: props.width ?? 50,
       height: 40,
       borderRadius: 9,
-      justifyContent: 'center'
+      justifyContent: 'center',
+      marginRight: 5,
+      marginBottom: 5
       }}>
       <Text style={{
         color: 'white',
@@ -26,7 +28,7 @@ export const TransportNumberCard = (props: {color?: string}) => {
             fontFamily: 'Raleway 700'
           },
         }),
-        }}>17</Text>
+      }}>{props.number}</Text>
     </Layout>
   )
 }
