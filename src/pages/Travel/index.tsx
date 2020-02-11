@@ -10,6 +10,7 @@ import {
 import {Layout, Text, styled} from '@ui-kitten/components';
 import {Header} from '../../components/Text/Header';
 import {TransportNumberCard} from '../../components/Card/TransportNumber';
+import {TouchableShadow} from '../../components/Shadow/Touchable';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import {processTheme, ThemeContext} from '../../functions/theme';
@@ -51,11 +52,34 @@ class TravelPage extends React.Component<NavigationInjectedProps> {
                 />
               </View>
               <ScrollView>
-                <Image
-                  width={Dimensions.get('window').width}
-                  source={sstmap}
-                  style={{marginTop: 10}}
-                />
+                <View>
+                  <Image
+                    width={Dimensions.get('window').width}
+                    source={sstmap}
+                    style={{marginTop: 10}}
+                  />
+                  <View style={{width: '100%', alignContent: 'flex-end'}}>
+                      <TouchableShadow onPress={() => {}} style={{alignSelf: 'flex-end'}}>
+                        <Layout
+                          style={{
+                            padding: 10,
+                            borderRadius: 25,
+                            width: 50,
+                            height: 50,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginRight: 10,
+                            marginTop: -60
+                          }}>
+                          <Icon
+                            name="expand"
+                            size={25}
+                            color={theme.theme === 'light' ? 'black' : 'white'}
+                          />
+                        </Layout>
+                      </TouchableShadow>
+                    </View>
+                </View>
                 <View style={{marginHorizontal: 20}}>
                   <View style={{flexDirection: 'row', marginTop: 10}}>
                     <Icon
@@ -131,18 +155,21 @@ class TravelPage extends React.Component<NavigationInjectedProps> {
                       color="#429346"
                     />
                     <View style={{marginLeft: 5}}>
-                      <Text style={{
-                        ...Platform.select({
-                          ios: {
-                            fontWeight: '700',
-                            fontFamily: 'Raleway'
-                          },
-                          android: {
-                            fontWeight: undefined,
-                            fontFamily: 'Raleway 700'
-                          },
-                        }),
-                      }}>Dover MRT Station</Text>
+                      <Text
+                        style={{
+                          ...Platform.select({
+                            ios: {
+                              fontWeight: '700',
+                              fontFamily: 'Raleway',
+                            },
+                            android: {
+                              fontWeight: undefined,
+                              fontFamily: 'Raleway 700',
+                            },
+                          }),
+                        }}>
+                        Dover MRT Station
+                      </Text>
                       <Text>East-West Line</Text>
                     </View>
                   </View>
@@ -155,7 +182,7 @@ class TravelPage extends React.Component<NavigationInjectedProps> {
                     />
                     <Header style={{fontSize: 20}}>Bus</Header>
                   </View>
-                  <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>
+                  <View style={{flexDirection: 'row', flexWrap: 'wrap', marginBottom: 150}}>
                     {sstBuses.map((content, index) => {
                       return (
                         <TransportNumberCard number={content} key={index} />
