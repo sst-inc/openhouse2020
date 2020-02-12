@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextStyle} from 'react-native';
+import {TextStyle, Platform} from 'react-native';
 import {Layout} from '@ui-kitten/components';
 import {Header} from '../../Text/Header';
 import {HeaderSmall} from '../../Text/HeaderSmall';
@@ -26,7 +26,18 @@ export const RedemptionCard = (props: {
         <Header variant={4} status={props.status} style={{marginBottom: 3}}>
           {props.title}
         </Header>
-        <HeaderSmall status={props.status} style={props.subtitleStyle}>
+        <HeaderSmall status={props.status} style={{
+          ...props.subtitleStyle,
+          ...Platform.select({
+            android: {
+              fontFamily: 'Raleway 700',
+            },
+            ios: {
+              fontFamily: 'Raleway',
+              fontWeight: '700',
+            },
+          }),
+          }}>
           {props.subtitle}
         </HeaderSmall>
       </Layout>

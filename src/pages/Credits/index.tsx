@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-  Image,
-  SafeAreaView, View,
+  SafeAreaView, View, Dimensions
 } from 'react-native';
+import Image from 'react-native-scalable-image'
 import {Layout, Text} from '@ui-kitten/components';
 import {NavigationInjectedProps} from 'react-navigation';
 
@@ -33,15 +33,13 @@ class CreditsPage extends React.Component<NavigationInjectedProps> {
             <View style={{
               backgroundColor: 'white',
               borderRadius: 5,
-              flex: 1,
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              paddingHorizontal: 20,
+              paddingVertical: 60,
+              marginBottom: 20
             }}>
-              <Image source={creditsImage} style={{
-                width: '90%',
-                height: '90%',
-                resizeMode: 'contain'
-              }}>
+              <Image source={creditsImage} width={Dimensions.get('window').width * 0.8}>
               </Image>
             </View>
             <View style={{marginTop: 15}}>
